@@ -1,0 +1,87 @@
+{
+    "copyFilesFilter": [
+        "../bin/**/*.*"
+    ],
+    "openDataZone": false,
+    "compressJson": true,
+    "compressJsonFilter": [
+        "$basePath/**/*.{json,atlas}"
+    ],
+    "compressJsonNoteList": [
+        ""
+    ],
+    "compressImage": true,
+    "compressImageFilter": [
+        "$basePath/**/*.{png,jpg}"
+    ],
+    "compressImageNoteList": [
+        ""
+    ],
+    "compressJs": true,
+    "compressJsFilter": [
+        "$basePath/**/*.js",
+        "!$basePath/libs/**/*.js"
+    ],
+    "compressJsNoteList": [
+        "",
+        ""
+    ],
+    "version": false,
+    "versionFilter": [
+        "$basePath/**/*.*",
+        "!$basePath/*.html",
+        "!$basePath/{version.json,game.js,game.json,project.config.json,weapp-adapter.js,project.swan.json,swan-game-adapter.js,main.js,gameConfig.json}",
+        "!$basePath/layaforqq/**/*.*"
+    ],
+    "versionNoteList": [
+        "",
+        "",
+        "",
+        ""
+    ],
+    "packfile": false,
+    "packfileFilter": [
+        ""
+    ],
+    "packfileFullValue": [
+        "$basePath/**/*.*"
+    ],
+    "packfileTargetValue": "",
+    "packfileNoteList": [
+        ""
+    ],
+    "clearReleaseDir": true,
+    "compile": true,
+    "onlyIndexJS": true,
+    "projectType": "ts",
+    "pubTime": 1605525092751,
+    "oppoInfo": {
+        "name": "推个大大卷",
+        "projName": "quickgame",
+        "package": "com.csjc.tgddj.nearme.gamecenter",
+        "icon": "D:\\LayaProjects\\PersonalProject\\PushAndRoll\\OPPO\\FrameWork\\256.jpg",
+        "versionName": "1.0",
+        "versionCode": 1,
+        "minPlatformVersion": 1060,
+        "orientation": "portrait",
+        "oppoDebug": false,
+        "useReleaseSign": true,
+        "subpack": true
+    },
+    "oppoSign": {
+        "generateSign": false,
+        "countryName": "",
+        "provinceName": "",
+        "localityName": "",
+        "orgName": "",
+        "orgUnitName": "",
+        "commonName": "",
+        "emailAddr": ""
+    },
+    "oppoSubpack": [
+        {
+            "name": "subRes",
+            "root": "subRes/"
+        }
+    ]
+}

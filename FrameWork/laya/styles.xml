@@ -1,0 +1,19 @@
+<res>
+   <item name="LoadingView" type="" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="Kd/bj_kuangdian.jpg" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="Kd/img_baoxiang.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="Kd/img_jiesuan_2.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="Kd/img_jiesuan_1.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="Kd/jindu_3.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="Kd/jindu_4.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="InGame/img_tishi.png" type="Image" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="Kd/1.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="Kd/beijing.jpg" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="Daochu/diban-haoyou.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="LoadingView/qiang_1.png" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="LoadingView/logo.png" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="LoadingView/loading.png" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="SelectHero/tongyongbeijing.jpg" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="GamePlaying/tishi1.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="GamePlaying/tishi2.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+</res>

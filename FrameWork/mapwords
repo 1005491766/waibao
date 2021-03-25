@@ -1,0 +1,1434 @@
+[
+    {
+        "rep": "_vAHu",
+        "var": "ALDEventDef_csjc"
+    },
+    {
+        "rep": "_XEtt",
+        "var": "ALD_csjc"
+    },
+    {
+        "rep": "_bBiL",
+        "var": "aldSendOpenId_csjc"
+    },
+    {
+        "rep": "_EXPS",
+        "var": "aldSendEvent_csjc"
+    },
+    {
+        "rep": "_FdaO",
+        "var": "aldSendReportAdClickSuccess_csjc"
+    },
+    {
+        "rep": "_ITQK",
+        "var": "aldSendReportAdClickFail_csjc"
+    },
+    {
+        "rep": "_qyAE",
+        "var": "GameSettings_csjc"
+    },
+    {
+        "rep": "_Smwb",
+        "var": "AppID_csjc"
+    },
+    {
+        "rep": "_zCiR",
+        "var": "RemoteServerUrl_csjc"
+    },
+    {
+        "rep": "_CESI",
+        "var": "LocalServerUrl_csjc"
+    },
+    {
+        "rep": "_ztMT",
+        "var": "Versions_csjc"
+    },
+    {
+        "rep": "_LDmU",
+        "var": "GamePlatform_csjc"
+    },
+    {
+        "rep": "_Tnlw",
+        "var": "User_csjc"
+    },
+    {
+        "rep": "_SrXd",
+        "var": "LoadingView_csjc"
+    },
+    {
+        "rep": "_aLgd",
+        "var": "WXAPI_csjc"
+    },
+    {
+        "rep": "_YtwI",
+        "var": "EventMgr_csjc"
+    },
+    {
+        "rep": "_RFiH",
+        "var": "EventDef_csjc"
+    },
+    {
+        "rep": "_XVtl",
+        "var": "OPPOAPI_csjc"
+    },
+    {
+        "rep": "_Yxmt",
+        "var": "QQMiniGameAPI_csjc"
+    },
+    {
+        "rep": "_onMn",
+        "var": "CachedWXBannerAd_csjc"
+    },
+    {
+        "rep": "_vnNa",
+        "var": "VIVOAPI_csjc"
+    },
+    {
+        "rep": "_dmme",
+        "var": "GdIpManager_csjc"
+    },
+    {
+        "rep": "_lcrX",
+        "var": "GameSwitch_csjc"
+    },
+    {
+        "rep": "_KYkJ",
+        "var": "setProcess_csjc"
+    },
+    {
+        "rep": "_hAPu",
+        "var": "requestData_csjc"
+    },
+    {
+        "rep": "_VAmO",
+        "var": "IpIsPass_csjc"
+    },
+    {
+        "rep": "_GHub",
+        "var": "UpdateIpState_csjc"
+    },
+    {
+        "rep": "_oRPx",
+        "var": "request_csjc"
+    },
+    {
+        "rep": "_Ltha",
+        "var": "GameSwitchForm_csjc"
+    },
+    {
+        "rep": "_HHNi",
+        "var": "UpdateOnlineConfig_csjc"
+    },
+    {
+        "rep": "_IRgT",
+        "var": "initOptions_csjc"
+    },
+    {
+        "rep": "_fbEu",
+        "var": "UpdateLocalConfig_csjc"
+    },
+    {
+        "rep": "_MTRM",
+        "var": "gameKiller_csjc"
+    },
+    {
+        "rep": "_nfTz",
+        "var": "version_csjc"
+    },
+    {
+        "rep": "_BFqU",
+        "var": "blockCitys_csjc"
+    },
+    {
+        "rep": "_SYMs",
+        "var": "btnShowTimer_csjc"
+    },
+    {
+        "rep": "_UDLI",
+        "var": "btnMoveTimer_csjc"
+    },
+    {
+        "rep": "_cHkD",
+        "var": "bannerMoveTimer_csjc"
+    },
+    {
+        "rep": "_eOVA",
+        "var": "wxConf_csjc"
+    },
+    {
+        "rep": "_TuSc",
+        "var": "oppoConf_csjc"
+    },
+    {
+        "rep": "_pwMZ",
+        "var": "ttConf_csjc"
+    },
+    {
+        "rep": "_TTNd",
+        "var": "vivoAdConf_csjc"
+    },
+    {
+        "rep": "_LWVt",
+        "var": "qqConf_csjc"
+    },
+    {
+        "rep": "_yIFq",
+        "var": "versions_csjc"
+    },
+    {
+        "rep": "_Lztc",
+        "var": "adSwitch_csjc"
+    },
+    {
+        "rep": "_jFFT",
+        "var": "wxBanner_csjc"
+    },
+    {
+        "rep": "_qmKv",
+        "var": "wudian_csjc"
+    },
+    {
+        "rep": "_xFfT",
+        "var": "bannerCreateFailNum_csjc"
+    },
+    {
+        "rep": "_ThKr",
+        "var": "bannerTodayBannerMax_csjc"
+    },
+    {
+        "rep": "_AVvg",
+        "var": "wxGridAds_csjc"
+    },
+    {
+        "rep": "_xsOd",
+        "var": "examineSceneList_csjc"
+    },
+    {
+        "rep": "_HzDE",
+        "var": "wxWuDianBanners_csjc"
+    },
+    {
+        "rep": "_IJmf",
+        "var": "vivoConf_csjc"
+    },
+    {
+        "rep": "_sVnz",
+        "var": "yuanshengSwitch_csjc"
+    },
+    {
+        "rep": "_TGbQ",
+        "var": "yuanshengWudian_csjc"
+    },
+    {
+        "rep": "_fGur",
+        "var": "yuanshengBtnShowTime_csjc"
+    },
+    {
+        "rep": "_mfse",
+        "var": "yuanshengReplaceBanner1_csjc"
+    },
+    {
+        "rep": "_qEuu",
+        "var": "yuanshengReplaceBanner2_csjc"
+    },
+    {
+        "rep": "_LpUD",
+        "var": "yuanshengReplaceBannerCloseOpenBanner_csjc"
+    },
+    {
+        "rep": "_Dfuo",
+        "var": "yuanshengGameOver_csjc"
+    },
+    {
+        "rep": "_ZpQa",
+        "var": "addToDesktop_csjc"
+    },
+    {
+        "rep": "_BcNt",
+        "var": "yuanshengGameOverLevel_csjc"
+    },
+    {
+        "rep": "_NUvY",
+        "var": "bannerWudian1_csjc"
+    },
+    {
+        "rep": "_VZfs",
+        "var": "bannerWudian2_csjc"
+    },
+    {
+        "rep": "_jXmL",
+        "var": "bannerWudian3_csjc"
+    },
+    {
+        "rep": "_cmMA",
+        "var": "bannerWudian4_csjc"
+    },
+    {
+        "rep": "_MGUc",
+        "var": "bannerWudian5_csjc"
+    },
+    {
+        "rep": "_PcFX",
+        "var": "AbVerSwitch_csjc"
+    },
+    {
+        "rep": "_SjRD",
+        "var": "exportSwitch_csjc"
+    },
+    {
+        "rep": "_SJff",
+        "var": "None_csjc"
+    },
+    {
+        "rep": "_Qdqp",
+        "var": "App_CloseFirstLoadingView_csjc"
+    },
+    {
+        "rep": "_fqyG",
+        "var": "AD_OnShareAdFail_csjc"
+    },
+    {
+        "rep": "_pBTQ",
+        "var": "Game_OnViewOpen_csjc"
+    },
+    {
+        "rep": "_PCzp",
+        "var": "Game_OnViewClose_csjc"
+    },
+    {
+        "rep": "_Sudw",
+        "var": "Game_OnUserMoneyChange_csjc"
+    },
+    {
+        "rep": "_ecVZ",
+        "var": "Game_OnUserCrystalChange_csjc"
+    },
+    {
+        "rep": "_CKST",
+        "var": "Game_OnLevelStart_csjc"
+    },
+    {
+        "rep": "_jFQp",
+        "var": "Game_OnLevelComplate_csjc"
+    },
+    {
+        "rep": "_frJc",
+        "var": "Game_GameSceneLoadCompelete_csjc"
+    },
+    {
+        "rep": "_JxaS",
+        "var": "AD_WudianBanner_LoadComplete_csjc"
+    },
+    {
+        "rep": "_qTwT",
+        "var": "AD_WudianBanner_Show_csjc"
+    },
+    {
+        "rep": "_yHUp",
+        "var": "AD_WudianBanner_Hide_csjc"
+    },
+    {
+        "rep": "_lcSg",
+        "var": "AD_WudianBanner_PreLoad_csjc"
+    },
+    {
+        "rep": "_mJXx",
+        "var": "AD_SidePopViewSwitch_csjc"
+    },
+    {
+        "rep": "_RWSD",
+        "var": "Game_Input_csjc"
+    },
+    {
+        "rep": "_oiZD",
+        "var": "Game_Click_csjc"
+    },
+    {
+        "rep": "_NQaO",
+        "var": "Game_Click_State_csjc"
+    },
+    {
+        "rep": "_xdvu",
+        "var": "Camera_Event_csjc"
+    },
+    {
+        "rep": "_hwzp",
+        "var": "Game_ShowScore_csjc"
+    },
+    {
+        "rep": "_BrZM",
+        "var": "eventDispatcher_csjc"
+    },
+    {
+        "rep": "_lqBk",
+        "var": "dispatch_csjc"
+    },
+    {
+        "rep": "_gYCo",
+        "var": "regEvent_csjc"
+    },
+    {
+        "rep": "_pGnY",
+        "var": "regOnceEvent_csjc"
+    },
+    {
+        "rep": "_CLps",
+        "var": "removeEvent_csjc"
+    },
+    {
+        "rep": "_TDRP",
+        "var": "StorageMgr_csjc"
+    },
+    {
+        "rep": "_SPVm",
+        "var": "SignInData_csjc"
+    },
+    {
+        "rep": "_CHQa",
+        "var": "FirstDay_csjc"
+    },
+    {
+        "rep": "_CXCH",
+        "var": "SignPeriod_csjc"
+    },
+    {
+        "rep": "_GrkQ",
+        "var": "SignInDays_csjc"
+    },
+    {
+        "rep": "_hurc",
+        "var": "SignMgr_csjc"
+    },
+    {
+        "rep": "_KfHV",
+        "var": "_instance_csjc"
+    },
+    {
+        "rep": "_ibnr",
+        "var": "Instance_csjc"
+    },
+    {
+        "rep": "_QeKs",
+        "var": "ContiuneSign_csjc"
+    },
+    {
+        "rep": "_HWRu",
+        "var": "_signInData_csjc"
+    },
+    {
+        "rep": "_MwcD",
+        "var": "GetStorageData_csjc"
+    },
+    {
+        "rep": "_bdHN",
+        "var": "SetStorageData_csjc"
+    },
+    {
+        "rep": "_PKxn",
+        "var": "IsDataValid_csjc"
+    },
+    {
+        "rep": "_HPia",
+        "var": "StorageReq_csjc"
+    },
+    {
+        "rep": "_iGSK",
+        "var": "GetDayOfYear_csjc"
+    },
+    {
+        "rep": "_QYdx",
+        "var": "IsSignInToday_csjc"
+    },
+    {
+        "rep": "_heks",
+        "var": "DayInPeriod_csjc"
+    },
+    {
+        "rep": "_btRM",
+        "var": "SignIn_csjc"
+    },
+    {
+        "rep": "_kinW",
+        "var": "SkinMgr_csjc"
+    },
+    {
+        "rep": "_KSvE",
+        "var": "SkinCount_csjc"
+    },
+    {
+        "rep": "_zOdH",
+        "var": "_skinDate_csjc"
+    },
+    {
+        "rep": "_lLna",
+        "var": "GetCurrentSkin_csjc"
+    },
+    {
+        "rep": "_ouJU",
+        "var": "CurrentSkinDate_csjc"
+    },
+    {
+        "rep": "_eOQe",
+        "var": "SetCurrentSkin_csjc"
+    },
+    {
+        "rep": "_RedH",
+        "var": "SaveSkinDate_csjc"
+    },
+    {
+        "rep": "_Fybp",
+        "var": "SkinDate_csjc"
+    },
+    {
+        "rep": "_noyC",
+        "var": "Owned_csjc"
+    },
+    {
+        "rep": "_mfYk",
+        "var": "GetSkinAvailable_csjc"
+    },
+    {
+        "rep": "_WIwb",
+        "var": "UnLockSkin_csjc"
+    },
+    {
+        "rep": "_pfgw",
+        "var": "CurrentSkin_csjc"
+    },
+    {
+        "rep": "_exPX",
+        "var": "SoundMgr_csjc"
+    },
+    {
+        "rep": "_pWKt",
+        "var": "soundResPath_csjc"
+    },
+    {
+        "rep": "_Zyak",
+        "var": "instance_csjc"
+    },
+    {
+        "rep": "_wcJt",
+        "var": "bgm_csjc"
+    },
+    {
+        "rep": "_WVDl",
+        "var": "_bgmname_csjc"
+    },
+    {
+        "rep": "_wIST",
+        "var": "getSoundUrl_csjc"
+    },
+    {
+        "rep": "_VcXA",
+        "var": "playSound_csjc"
+    },
+    {
+        "rep": "_fImd",
+        "var": "playBGM_csjc"
+    },
+    {
+        "rep": "_ZgiB",
+        "var": "stopBGM_csjc"
+    },
+    {
+        "rep": "_pRVF",
+        "var": "setBGMVolume_csjc"
+    },
+    {
+        "rep": "_GxvN",
+        "var": "setStorage_csjc"
+    },
+    {
+        "rep": "_KfPN",
+        "var": "getStorage_csjc"
+    },
+    {
+        "rep": "_xSht",
+        "var": "VibrateMgr_csjc"
+    },
+    {
+        "rep": "_jaUp",
+        "var": "vibrateShort_csjc"
+    },
+    {
+        "rep": "_gbNI",
+        "var": "vibrateLong_csjc"
+    },
+    {
+        "rep": "_LoGZ",
+        "var": "vibrate_csjc"
+    },
+    {
+        "rep": "_fARr",
+        "var": "ViewBase_csjc"
+    },
+    {
+        "rep": "_PsHl",
+        "var": "ViewDef_csjc"
+    },
+    {
+        "rep": "_xngA",
+        "var": "ViewMgr_csjc"
+    },
+    {
+        "rep": "_tuVF",
+        "var": "_views_csjc"
+    },
+    {
+        "rep": "_aIrg",
+        "var": "openView_csjc"
+    },
+    {
+        "rep": "_Fiug",
+        "var": "closeView_csjc"
+    },
+    {
+        "rep": "_QPPp",
+        "var": "showView_csjc"
+    },
+    {
+        "rep": "_xFtg",
+        "var": "hideView_csjc"
+    },
+    {
+        "rep": "_dtTO",
+        "var": "getView_csjc"
+    },
+    {
+        "rep": "_NfHT",
+        "var": "showTips_csjc"
+    },
+    {
+        "rep": "_PlRU",
+        "var": "AesTools_csjc"
+    },
+    {
+        "rep": "_uXRB",
+        "var": "encrypt_csjc"
+    },
+    {
+        "rep": "_iPnF",
+        "var": "decrypt_csjc"
+    },
+    {
+        "rep": "_LESO",
+        "var": "NetConfig_csjc"
+    },
+    {
+        "rep": "_nbAw",
+        "var": "HttpUnit_csjc"
+    },
+    {
+        "rep": "_Pcbw",
+        "var": "login_csjc"
+    },
+    {
+        "rep": "_MzGK",
+        "var": "saveGameData_csjc"
+    },
+    {
+        "rep": "_kdAH",
+        "var": "getGameData_csjc"
+    },
+    {
+        "rep": "_YChQ",
+        "var": "GetIpBlock_csjc"
+    },
+    {
+        "rep": "_Fbti",
+        "var": "reportExport_csjc"
+    },
+    {
+        "rep": "_jXLr",
+        "var": "reportImport_csjc"
+    },
+    {
+        "rep": "_irqB",
+        "var": "getuserip_csjc"
+    },
+    {
+        "rep": "_pMJB",
+        "var": "state_csjc"
+    },
+    {
+        "rep": "_cfvF",
+        "var": "gameid_csjc"
+    },
+    {
+        "rep": "_YApc",
+        "var": "serverUrl_csjc"
+    },
+    {
+        "rep": "_Wqkf",
+        "var": "getUser_csjc"
+    },
+    {
+        "rep": "_jwXi",
+        "var": "IObj_csjc"
+    },
+    {
+        "rep": "_NeYp",
+        "var": "OP_Key_csjc"
+    },
+    {
+        "rep": "_nesr",
+        "var": "OP_Init_csjc"
+    },
+    {
+        "rep": "_XBPl",
+        "var": "OP_Reset_csjc"
+    },
+    {
+        "rep": "_EpAN",
+        "var": "OP_OnClear_csjc"
+    },
+    {
+        "rep": "_fQVi",
+        "var": "ObjPool_csjc"
+    },
+    {
+        "rep": "_uXWe",
+        "var": "_pool_csjc"
+    },
+    {
+        "rep": "_fMxC",
+        "var": "_createCaller_csjc"
+    },
+    {
+        "rep": "_vKCP",
+        "var": "_createFunc_csjc"
+    },
+    {
+        "rep": "_Nozo",
+        "var": "get_csjc"
+    },
+    {
+        "rep": "_sKHy",
+        "var": "recover_csjc"
+    },
+    {
+        "rep": "_HecE",
+        "var": "clear_csjc"
+    },
+    {
+        "rep": "_lQUk",
+        "var": "setCreateFunc_csjc"
+    },
+    {
+        "rep": "_tPLj",
+        "var": "ObjExample_csjc"
+    },
+    {
+        "rep": "_CXmX",
+        "var": "ObjPoolExample_csjc"
+    },
+    {
+        "rep": "_TWEq",
+        "var": "createObjExample_csjc"
+    },
+    {
+        "rep": "_bGoI",
+        "var": "_bannerCache_csjc"
+    },
+    {
+        "rep": "_KAPE",
+        "var": "_curBanner_csjc"
+    },
+    {
+        "rep": "_SLse",
+        "var": "_preLoopObj_csjc"
+    },
+    {
+        "rep": "_xUpJ",
+        "var": "_wxBannerIds_csjc"
+    },
+    {
+        "rep": "_uwuZ",
+        "var": "_curBannerId_csjc"
+    },
+    {
+        "rep": "_ddLJ",
+        "var": "_bannerIndex_csjc"
+    },
+    {
+        "rep": "_MIMy",
+        "var": "GetBannerId_csjc"
+    },
+    {
+        "rep": "_WPEh",
+        "var": "preloadBanner_csjc"
+    },
+    {
+        "rep": "_qwLP",
+        "var": "getBanner_csjc"
+    },
+    {
+        "rep": "_BIvR",
+        "var": "create_csjc"
+    },
+    {
+        "rep": "_lERV",
+        "var": "show_csjc"
+    },
+    {
+        "rep": "_cmjY",
+        "var": "hide_csjc"
+    },
+    {
+        "rep": "_OmrP",
+        "var": "changeShow_csjc"
+    },
+    {
+        "rep": "_bFwj",
+        "var": "appId_csjc"
+    },
+    {
+        "rep": "_IGeT",
+        "var": "adUnitId_csjc"
+    },
+    {
+        "rep": "_ZqjB",
+        "var": "bannerAdUnitId_csjc"
+    },
+    {
+        "rep": "_XiHp",
+        "var": "insAdUnitId_csjc"
+    },
+    {
+        "rep": "_UFTg",
+        "var": "openScreenAdUnitId_csjc"
+    },
+    {
+        "rep": "_LotE",
+        "var": "nativeAdId_csjc"
+    },
+    {
+        "rep": "_lffW",
+        "var": "nativeAdList_csjc"
+    },
+    {
+        "rep": "_dhrM",
+        "var": "GetNativeAd_csjc"
+    },
+    {
+        "rep": "_XQnF",
+        "var": "BannerInstance_csjc"
+    },
+    {
+        "rep": "_IJbj",
+        "var": "_banner_csjc"
+    },
+    {
+        "rep": "_bXyk",
+        "var": "Login_csjc"
+    },
+    {
+        "rep": "_ZokC",
+        "var": "initAdService_csjc"
+    },
+    {
+        "rep": "_YPkx",
+        "var": "showRewardedVideoAd_csjc"
+    },
+    {
+        "rep": "_sCBg",
+        "var": "navigateToMiniProgram_csjc"
+    },
+    {
+        "rep": "_Imrx",
+        "var": "showInterstitialAd_csjc"
+    },
+    {
+        "rep": "_hXIB",
+        "var": "showBannaerAd_csjc"
+    },
+    {
+        "rep": "_UyKV",
+        "var": "hideBannerAd_csjc"
+    },
+    {
+        "rep": "_RQzG",
+        "var": "getLaunchOptionsSync_csjc"
+    },
+    {
+        "rep": "_ZecP",
+        "var": "share_csjc"
+    },
+    {
+        "rep": "_Xmnw",
+        "var": "createDesktopIcon_csjc"
+    },
+    {
+        "rep": "_HygL",
+        "var": "hasDesktopIcon_csjc"
+    },
+    {
+        "rep": "_eWUe",
+        "var": "appBoxId_csjc"
+    },
+    {
+        "rep": "_fJDK",
+        "var": "_isRegRewardedVideoAdEvent_csjc"
+    },
+    {
+        "rep": "_uLLR",
+        "var": "_onRewardedVideoAdFailed_csjc"
+    },
+    {
+        "rep": "_rKnI",
+        "var": "_onRewardedVideoAdClose_csjc"
+    },
+    {
+        "rep": "_qZMW",
+        "var": "onRewardedVideoAdLoad_csjc"
+    },
+    {
+        "rep": "_XQjn",
+        "var": "onRewardedVideoAdError_csjc"
+    },
+    {
+        "rep": "_WxTq",
+        "var": "onRewardedVideoAdClose_csjc"
+    },
+    {
+        "rep": "_nREA",
+        "var": "regRewardedVideoAdEvent_csjc"
+    },
+    {
+        "rep": "_kvRe",
+        "var": "_onShow_csjc"
+    },
+    {
+        "rep": "_ljvy",
+        "var": "_lastShareTime_csjc"
+    },
+    {
+        "rep": "_igTY",
+        "var": "mAppboxAd_csjc"
+    },
+    {
+        "rep": "_wwlN",
+        "var": "LoadAppBoxAd_csjc"
+    },
+    {
+        "rep": "_vHkR",
+        "var": "showAppBoxAd_csjc"
+    },
+    {
+        "rep": "_GqpO",
+        "var": "SetShareMenu_csjc"
+    },
+    {
+        "rep": "_naVC",
+        "var": "rewardedAd_csjc"
+    },
+    {
+        "rep": "_tYGv",
+        "var": "rewardedAdNum_csjc"
+    },
+    {
+        "rep": "_uxbp",
+        "var": "nativeIndex_csjc"
+    },
+    {
+        "rep": "_KSwh",
+        "var": "showDialog_csjc"
+    },
+    {
+        "rep": "_xMiN",
+        "var": "VIVOLogin_csjc"
+    },
+    {
+        "rep": "_scOY",
+        "var": "createRewardedVideoAd_csjc"
+    },
+    {
+        "rep": "_lKUT",
+        "var": "mBannerAd_csjc"
+    },
+    {
+        "rep": "_hRkc",
+        "var": "showBannerAd_csjc"
+    },
+    {
+        "rep": "_ydzU",
+        "var": "preLoadInterstitialAd_csjc"
+    },
+    {
+        "rep": "_SfIF",
+        "var": "nativeadId_csjc"
+    },
+    {
+        "rep": "_uUQx",
+        "var": "wxLogin_csjc"
+    },
+    {
+        "rep": "_SrRm",
+        "var": "checkUpdate_csjc"
+    },
+    {
+        "rep": "_mKVF",
+        "var": "IViewStateListener_csjc"
+    },
+    {
+        "rep": "_fdwl",
+        "var": "SceneMgr_csjc"
+    },
+    {
+        "rep": "_UKme",
+        "var": "GameMgr_csjc"
+    },
+    {
+        "rep": "_Zjdo",
+        "var": "preCreateGame_csjc"
+    },
+    {
+        "rep": "_xKhR",
+        "var": "Input_csjc"
+    },
+    {
+        "rep": "_cyHw",
+        "var": "StartGame_csjc"
+    },
+    {
+        "rep": "_avDf",
+        "var": "SuperStart_csjc"
+    },
+    {
+        "rep": "_OemP",
+        "var": "SuperStartClicl_csjc"
+    },
+    {
+        "rep": "_QTxP",
+        "var": "_bg_csjc"
+    },
+    {
+        "rep": "_xreD",
+        "var": "_clickBtn_csjc"
+    },
+    {
+        "rep": "_VWQv",
+        "var": "_progress_csjc"
+    },
+    {
+        "rep": "_sBHf",
+        "var": "_progressBar_csjc"
+    },
+    {
+        "rep": "_LbBr",
+        "var": "_progressWidth_csjc"
+    },
+    {
+        "rep": "_TTYu",
+        "var": "_clickTime_csjc"
+    },
+    {
+        "rep": "_bRum",
+        "var": "_totalClickTime_csjc"
+    },
+    {
+        "rep": "_aNto",
+        "var": "_totalClickTimer_csjc"
+    },
+    {
+        "rep": "_ydmP",
+        "var": "_needClickTime_csjc"
+    },
+    {
+        "rep": "_LjIY",
+        "var": "_bannerClickTime_csjc"
+    },
+    {
+        "rep": "_ceJa",
+        "var": "_bannerClicked_csjc"
+    },
+    {
+        "rep": "_oCgx",
+        "var": "code_csjc"
+    },
+    {
+        "rep": "_WAhW",
+        "var": "openId_csjc"
+    },
+    {
+        "rep": "_xShJ",
+        "var": "token_csjc"
+    },
+    {
+        "rep": "_JWDM",
+        "var": "nickName_csjc"
+    },
+    {
+        "rep": "_RAnP",
+        "var": "gender_csjc"
+    },
+    {
+        "rep": "_roOD",
+        "var": "city_csjc"
+    },
+    {
+        "rep": "_jvAR",
+        "var": "_useLocalStorage_csjc"
+    },
+    {
+        "rep": "_zanh",
+        "var": "getSaveData_csjc"
+    },
+    {
+        "rep": "_pkVb",
+        "var": "testInitUser_csjc"
+    },
+    {
+        "rep": "_lXES",
+        "var": "initiUser_csjc"
+    },
+    {
+        "rep": "_OQbk",
+        "var": "SaveGameData_csjc"
+    },
+    {
+        "rep": "_ihFm",
+        "var": "SetUserData_csjc"
+    },
+    {
+        "rep": "_OEhj",
+        "var": "SaveLocalGameDate_csjc"
+    },
+    {
+        "rep": "_Naby",
+        "var": "setLeveNum_csjc"
+    },
+    {
+        "rep": "_RZJY",
+        "var": "getLeveNum_csjc"
+    },
+    {
+        "rep": "_juRc",
+        "var": "addMoney_csjc"
+    },
+    {
+        "rep": "_iHVP",
+        "var": "subMoney_csjc"
+    },
+    {
+        "rep": "_tegI",
+        "var": "getMoney_csjc"
+    },
+    {
+        "rep": "_aJze",
+        "var": "addCrystal_csjc"
+    },
+    {
+        "rep": "_SeyW",
+        "var": "subCrystal_csjc"
+    },
+    {
+        "rep": "_jVcp",
+        "var": "getCrystal_csjc"
+    },
+    {
+        "rep": "_nCci",
+        "var": "GetSpeed_csjc"
+    },
+    {
+        "rep": "_EbsX",
+        "var": "SetSpeed_csjc"
+    },
+    {
+        "rep": "_hrLI",
+        "var": "GetPiece_csjc"
+    },
+    {
+        "rep": "_Ewlt",
+        "var": "SetPiece_csjc"
+    },
+    {
+        "rep": "_yfQO",
+        "var": "GetFoot_csjc"
+    },
+    {
+        "rep": "_Wzzf",
+        "var": "SetFoot_csjc"
+    },
+    {
+        "rep": "_ocTa",
+        "var": "AlphaBreathingAni_csjc"
+    },
+    {
+        "rep": "_Cwwr",
+        "var": "BreathingSpeed_csjc"
+    },
+    {
+        "rep": "_IdgY",
+        "var": "_add_csjc"
+    },
+    {
+        "rep": "_vFBO",
+        "var": "_ownerSprite_csjc"
+    },
+    {
+        "rep": "_TprQ",
+        "var": "bgAni_csjc"
+    },
+    {
+        "rep": "_fdra",
+        "var": "ButtonAnim_csjc"
+    },
+    {
+        "rep": "_mUvE",
+        "var": "useSound_csjc"
+    },
+    {
+        "rep": "_jdEp",
+        "var": "onDown_csjc"
+    },
+    {
+        "rep": "_bPfG",
+        "var": "onUp_csjc"
+    },
+    {
+        "rep": "_OlLu",
+        "var": "ButtonPress_csjc"
+    },
+    {
+        "rep": "_lNoI",
+        "var": "onPress_csjc"
+    },
+    {
+        "rep": "_cmyh",
+        "var": "_ownerSp_csjc"
+    },
+    {
+        "rep": "_HeBM",
+        "var": "_press_csjc"
+    },
+    {
+        "rep": "_GUQF",
+        "var": "onOut_csjc"
+    },
+    {
+        "rep": "_haIS",
+        "var": "CircularProcessBar_csjc"
+    },
+    {
+        "rep": "_qfof",
+        "var": "color_csjc"
+    },
+    {
+        "rep": "_aTSI",
+        "var": "lineColor_csjc"
+    },
+    {
+        "rep": "_gqQo",
+        "var": "lineWidth_csjc"
+    },
+    {
+        "rep": "_fGLc",
+        "var": "_value_csjc"
+    },
+    {
+        "rep": "_IXIO",
+        "var": "setValue_csjc"
+    },
+    {
+        "rep": "_QmhW",
+        "var": "isIViewStateListener_csjc"
+    },
+    {
+        "rep": "_zlik",
+        "var": "ScaleBreathingAni_csjc"
+    },
+    {
+        "rep": "_bPfr",
+        "var": "breathingSpeed_csjc"
+    },
+    {
+        "rep": "_zgHh",
+        "var": "maxScale_csjc"
+    },
+    {
+        "rep": "_VBuy",
+        "var": "minScale_csjc"
+    },
+    {
+        "rep": "_wikx",
+        "var": "onFocusChange_csjc"
+    },
+    {
+        "rep": "_XtaV",
+        "var": "TwinkleSprite_csjc"
+    },
+    {
+        "rep": "_GWzo",
+        "var": "_displaySp_csjc"
+    },
+    {
+        "rep": "_ROUw",
+        "var": "_disText_csjc"
+    },
+    {
+        "rep": "_fSHS",
+        "var": "_aniForward_csjc"
+    },
+    {
+        "rep": "_WYcy",
+        "var": "_fontSize_csjc"
+    },
+    {
+        "rep": "_RHPT",
+        "var": "_originSize_csjc"
+    },
+    {
+        "rep": "_QPjG",
+        "var": "displayAni_csjc"
+    },
+    {
+        "rep": "_cKEE",
+        "var": "ClickGetPrize_csjc"
+    },
+    {
+        "rep": "_tqCu",
+        "var": "UniversalBottomZone_csjc"
+    },
+    {
+        "rep": "_cTIa",
+        "var": "_autoZone_csjc"
+    },
+    {
+        "rep": "_ZvWb",
+        "var": "_loopADZone_csjc"
+    },
+    {
+        "rep": "_biBb",
+        "var": "_bannerADZone_csjc"
+    },
+    {
+        "rep": "_tiOi",
+        "var": "GameOverView_csjc"
+    },
+    {
+        "rep": "_WksT",
+        "var": "InGameView_csjc"
+    },
+    {
+        "rep": "_uSMk",
+        "var": "MainGameView_csjc"
+    },
+    {
+        "rep": "_ydxo",
+        "var": "_processBarBg_csjc"
+    },
+    {
+        "rep": "_ppXP",
+        "var": "_processBar_csjc"
+    },
+    {
+        "rep": "_IhGR",
+        "var": "_currentProcess_csjc"
+    },
+    {
+        "rep": "_nijM",
+        "var": "_processWidth_csjc"
+    },
+    {
+        "rep": "_iBie",
+        "var": "FinishLoading_csjc"
+    },
+    {
+        "rep": "_jkvR",
+        "var": "OppoNativeAdSubView_csjc"
+    },
+    {
+        "rep": "_ufSS",
+        "var": "_display_csjc"
+    },
+    {
+        "rep": "_MGbM",
+        "var": "_title_Text_csjc"
+    },
+    {
+        "rep": "_kpkj",
+        "var": "_gotoAd_Btn_csjc"
+    },
+    {
+        "rep": "_EtNR",
+        "var": "_closeBtn_csjc"
+    },
+    {
+        "rep": "_nMhx",
+        "var": "_ok_Btn_csjc"
+    },
+    {
+        "rep": "_FBPl",
+        "var": "_nativeAd_csjc"
+    },
+    {
+        "rep": "_Hqnu",
+        "var": "_curAdItem_csjc"
+    },
+    {
+        "rep": "_DLiq",
+        "var": "_reTry_csjc"
+    },
+    {
+        "rep": "_gvnV",
+        "var": "loadAd_csjc"
+    },
+    {
+        "rep": "_TBAj",
+        "var": "onOkBtn_csjc"
+    },
+    {
+        "rep": "_mkpL",
+        "var": "onCloseBtn_csjc"
+    },
+    {
+        "rep": "_CCoj",
+        "var": "onDisplayClick_csjc"
+    },
+    {
+        "rep": "_XXDo",
+        "var": "OppoNativeAdView_csjc"
+    },
+    {
+        "rep": "_OCzR",
+        "var": "_centerZone_csjc"
+    },
+    {
+        "rep": "_dFXA",
+        "var": "_okBtn_csjc"
+    },
+    {
+        "rep": "_NZhp",
+        "var": "_desc_Text_csjc"
+    },
+    {
+        "rep": "_USwu",
+        "var": "showCenterZone_csjc"
+    },
+    {
+        "rep": "_OAYw",
+        "var": "OppoNativeBanner_csjc"
+    },
+    {
+        "rep": "_Kwxm",
+        "var": "switchBanner_csjc"
+    },
+    {
+        "rep": "_uxPI",
+        "var": "TipsView_csjc"
+    },
+    {
+        "rep": "_sjST",
+        "var": "VivoNativeAdSubView_csjc"
+    },
+    {
+        "rep": "_nVUW",
+        "var": "VivoNativeAdView_csjc"
+    },
+    {
+        "rep": "_uork",
+        "var": "VivoNativeBanner_csjc"
+    }
+]

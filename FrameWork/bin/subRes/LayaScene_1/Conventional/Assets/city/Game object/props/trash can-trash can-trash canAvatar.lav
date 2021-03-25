@@ -1,0 +1,25 @@
+{
+	"version":"LAYAAVATAR:01",
+	"rootNode":{
+		"props":{
+			"name":"trash can",
+			"translate":[
+				0,
+				0,
+				0
+			],
+			"rotation":[
+				0.7071068,
+				0,
+				0,
+				-0.7071068
+			],
+			"scale":[
+				1,
+				1,
+				0.826144
+			]
+		},
+		"child":[]
+	}
+}

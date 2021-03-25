@@ -507,8 +507,16 @@ export default class TRexState extends BaseState {
             this._subState = TRexSubState.Eating;
             SoundMgr_csjc.instance_csjc.playSound_csjc("Eating");
         }
+
+        console.log("----------------我是恐龙攻击我",enemy.name)
+        // if()
     }
 
+    onTriggerEnter(res) {
+        // res.owner.name
+        console.log("----------------我是恐龙攻击我",res.owner.name)
+
+    }
     EatingMethod() {
         this.characterCtr.StopSound();
         if (this.CurrentAni != "Eating") {

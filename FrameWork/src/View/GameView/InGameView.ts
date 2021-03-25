@@ -8,6 +8,7 @@ import User_csjc from "../../User/User";
 import TmAPI from "../../TmAPI/TmAPI";
 import ExamineMgr from "../../CommomAPI/ExamineMgr";
 import CachedWXBannerAd_csjc from "../../PlatformApi/CachedWXBannerAd";
+import Camera2UI from "../../Scripts/GameCore/Camera2UI";
 
 export default class InGameView extends ViewBase_csjc {
     private _moreGameBtn: Laya.Image;
@@ -15,11 +16,13 @@ export default class InGameView extends ViewBase_csjc {
     private _complete: Laya.Image;
     private _fail: Laya.Image;
     private _tutorialBtn: Laya.Image;
+    private _pros:Laya.Image;
 
     onAwake() {
         this._moreGameBtn = this.owner.getChildByName("MoreGameBtn") as Laya.Image;
         this._tutorialBtn = this.owner.getChildByName("TutorialBtn") as Laya.Image;
         this._complete = this.owner.getChildByName("Complete") as Laya.Image;
+        this._pros = this.owner.getChildByName("progress") as Laya.Image;
         this._fail = this.owner.getChildByName("Fail") as Laya.Image;
         this._complete.visible = false;
         this._fail.visible = false;
@@ -69,6 +72,21 @@ export default class InGameView extends ViewBase_csjc {
     }
 
     onUpdate() {
+        // console.log("boss-------------",SceneMgr_cscj.Instance.Boss)
+        if(SceneMgr_cscj.Instance.Boss)
+        {
+            let closeDis = -1;
+            let cent = new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2);
+            let pos = SceneMgr_cscj.Instance.BossSprite3D.transform.position.clone();
+            pos.y += 2;
+            pos = Camera2UI.WorldToScreen2(SceneMgr_cscj.Instance.Camera, SceneMgr_cscj.Instance.BossSprite3D.transform.position)
+            this._pros.x = pos.x-300
+            this._pros.y = pos.y-100
+
+            let inRange =
+            (pos.x > Laya.stage.width * 0.25) && (pos.x < Laya.stage.width * 0.75) 
+
+        }
         if (this._gameOver || SceneMgr_cscj.Instance.GameOver == 0) return;
         this._gameOver = true;
         if (SceneMgr_cscj.Instance.GameOver == 1) {
@@ -85,6 +103,8 @@ export default class InGameView extends ViewBase_csjc {
                 this.GameOver(false);
             }
         })
+
+
     }
 
     GameOver(win: boolean) {

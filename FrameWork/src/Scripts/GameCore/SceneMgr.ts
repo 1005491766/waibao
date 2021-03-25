@@ -19,6 +19,9 @@ export default class SceneMgr_cscj extends Laya.Script3D {
     get CurrentScene(): Laya.Scene3D { return this.owner as Laya.Scene3D; }
     get ReplaceObj(): Laya.Sprite3D { return this._replaceObj; }
     get Player(): CharacterCtr { return this._playerCtr; }
+    get Boss(): CharacterCtr { return this._boss; }
+    get BossSprite3D(): Laya.Sprite3D { return this._boss.owner as Laya.Sprite3D; }
+
     get RestTimer(): number { return Math.floor(this._restTimer); }
     get EnemyList(): Array<Enemy> { return this._enemyList; }
     get EnemyLocList(): Array<any> { return this._enemyLocList; }
@@ -32,8 +35,10 @@ export default class SceneMgr_cscj extends Laya.Script3D {
     get StateId(): StateID { return this.Player.StateId }
 
     get PlayerKind(): number { return this._playerKind}
-
     set PlayerKind(kind) { this._playerKind = kind}
+
+    get BossKind(): number { return this._bossKind}
+    set BossKind(kind) { this._bossKind = kind}
 
 
     Scole: number = 0;
@@ -57,6 +62,7 @@ export default class SceneMgr_cscj extends Laya.Script3D {
     private _stateId: StateID;
 
     private _playerKind:PlayerType = PlayerType.TRex;
+    private _bossKind:PlayerType = PlayerType.TRex;
 
     private _boss:BossRobot;
 
@@ -107,7 +113,7 @@ export default class SceneMgr_cscj extends Laya.Script3D {
         boss.transform.position = new Laya.Vector3(0,0,0)
         boss.name = "boss"
         this._playerCtr = player.addComponent(CharacterCtr);
-        // this._boss = boss.addComponent(BossRobot);
+        this._boss = boss.addComponent(BossRobot);
 
         this._playerLoc = this.owner.getChildByName("PlayerLoc") as Laya.Sprite3D;
         if (User_csjc.getLeveNum_csjc() > 1) {

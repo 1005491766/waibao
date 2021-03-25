@@ -69,8 +69,7 @@ export default abstract class BaseState extends FSMState {
 
     protected _cameraAxis: Laya.Point = new Laya.Point();
     public Reason(any?: any) {
-        console.log("-----------------------输入数据",any)
-
+        // console.log("-----------------------输入数据",any)
         let input = any;
         if (!input) return;
         let type = input.InputType;

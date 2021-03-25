@@ -1,7 +1,7 @@
 import CharacterCtr from "./CharacterCtr";
 import EventMgr_csjc from "../../../Event/EventMgr";
 import { EventDef_csjc } from "../../../Event/EventDef";
-import { InputType, PlayerType } from "../Enums";
+import { InputType, PlayerType, CollisionGroup } from "../Enums";
 import FSMSystem from "../Fsm/FSMSystem";
 import TRexState from "../FsmStates/TRexState";
 import KingkingState from "../FsmStates/KingkingState";
@@ -21,27 +21,38 @@ export default class BossRobot extends CharacterCtr {
     private _ani : Laya.Animator = null;
     private _fsmboss:BaseState
     private _rigidBody3D: Laya.Rigidbody3D;
+    private _physicsComponent: Laya.PhysicsComponent;
     onEnable()
     {
         super.onEnable()
         this._mowner = this._playerKind != PlayerType.Kingkong?this._tRex:this._kingkong;
         this._ani = this._mowner.getChildAt(0).getComponent(Laya.Animator) as Laya.Animator;
         this._rigidBody3D =this._mowner.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
-        Laya.timer.frameLoop(30,this,()=>{
-            console.log("-------------------ai使用")
-            // this._fsm.CurrentState.Reason({InputType:InputType.Attack});
-            // this._subState = TRexSubState.Attack;        
-        })
 
+        this._physicsComponent = this._mowner.getComponent(Laya.PhysicsComponent);
+        // this._physicsComponent.collisionGroup = CollisionGroup.Obstacle;
+        // this._physicsComponent.canCollideWith = CollisionGroup.None | CollisionGroup.Ground | CollisionGroup.Character;
+        // this._rigidBody3D.isKinematic = false
+        
     }
     Input(point: Laya.Point) {
     }
     MakeFsm() {
         this._fsm = new FSMSystem(this);
-        this._fsm.AddState(this._kingkong.addComponent(KingkingState));
-        this._fsmboss = this._kingkong.getComponent(KingkingState)
-        this._tRex.active=false;
-        this._playerKind = PlayerType.Kingkong;
+
+        if(SceneMgr_cscj.Instance.BossKind == PlayerType.Kingkong)
+        {
+            this._fsm.AddState(this._kingkong.addComponent(KingkingState));
+            this._fsmboss = this._kingkong.getComponent(KingkingState)
+            this._tRex.active=false;
+            this._playerKind = PlayerType.Kingkong;
+        }
+        else{
+            this._fsm.AddState(this._tRex.addComponent(TRexState));
+            this._fsmboss = this._tRex.getComponent(TRexState)
+            this._kingkong.active=false;
+            this._playerKind = PlayerType.TRex;
+        }
     }
     SetFollowObj(obj: Laya.Sprite3D) {
     }
@@ -53,7 +64,7 @@ export default class BossRobot extends CharacterCtr {
         if (this._die||SceneMgr_cscj.Instance.Player==null) return;
         let dis = Laya.Vector3.distance(this.Sprite3D.transform.position, this.Player.transform.position);
         let inPlane = Math.abs(this.Sprite3D.transform.position.y - this.Player.transform.position.y) <= 1;
-        console.log("----------------是否打人",dis)
+        // console.log("----------------是否打人",dis)
         this.AniSprite.transform.localRotationEulerY=0    
 
         if (dis <= 10 && inPlane&&this._timer<=0) {
@@ -89,7 +100,7 @@ export default class BossRobot extends CharacterCtr {
     }
 
     Attack() {
-        console.log("----------------c查看角度",this._mowner.transform.rotationEuler.y)    
+        // console.log("----------------c查看角度",this._mowner.transform.rotationEuler.y)    
         this.AniSprite.transform.localRotationEulerY=0    
         this._timer = 2000;
         this.ChaseMethod();

@@ -42,6 +42,7 @@ export default class KingkingState extends BaseState {
         // this._animator.avatar. = false
         this._rigidBody3D = this.owner.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
         this._rigidBody3D.angularFactor = new Laya.Vector3(0, 0, 0);
+        this._rigidBody3D.isKinematic = false
         this._rigidBody3D.collisionGroup = CollisionGroup.Character;
         this._rigidBody3D.canCollideWith = CollisionGroup.All ^ CollisionGroup.Character;
         let ani = this.Model.addComponent(MyAnimatorEvent) as MyAnimatorEvent;
@@ -76,7 +77,6 @@ export default class KingkingState extends BaseState {
     public Reason(any?: any) {
         // console.log("-----------------------输入数据",any)
         super.Reason(any)
-        
     }
 
     /**
@@ -468,6 +468,8 @@ export default class KingkingState extends BaseState {
             this._subState = KingkongSubState.Eating;
             SoundMgr_csjc.instance_csjc.playSound_csjc("Eating");
         }
+        // console.log("----------------我是恐龙攻击我",enemy.name)
+
     }
 
     EatingMethod() {

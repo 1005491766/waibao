@@ -36,13 +36,16 @@ export default class SelectHero extends ViewBase_csjc {
     clickKingKong()
     {
         SceneMgr_cscj.Instance.PlayerKind = PlayerType.Kingkong
+        SceneMgr_cscj.Instance.BossKind = PlayerType.TRex
         this._select.x = this._heroSlt_0.x
-
+        
     }
 
     clickTRex()
     {
         SceneMgr_cscj.Instance.PlayerKind = PlayerType.TRex
+        SceneMgr_cscj.Instance.BossKind = PlayerType.Kingkong
+
         this._select.x = this._heroSlt_1.x
     }
     onPlayGame()

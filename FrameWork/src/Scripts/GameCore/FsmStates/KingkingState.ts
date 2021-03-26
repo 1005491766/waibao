@@ -18,13 +18,14 @@ enum KingkongSubState {
     Climb,
     ClimbEnd,
     ThrowStone,
-
+    Hited,
 }
 export default class KingkingState extends BaseState {
     constructor() {
         super();
         this.AddTransition(Transition.Kingkong2Trex, StateID.KingKong);
     }
+    get Hp(): number {return  this._hp}
     private _subState: KingkongSubState = KingkongSubState.Idle;
     private _attackTimer: number = 0;
     protected stateID = StateID.KingKong;
@@ -65,9 +66,21 @@ export default class KingkingState extends BaseState {
 
     public DoBeforeEntering(any?: any) {
         this.characterCtr.SetFollowObj(this.Sprite3D);
-        this.Animator.play("ClimbingOver");
+        this.Animator.play("Idle");
         EventMgr_csjc.dispatch_csjc(EventDef_csjc.TransformEvent, [false]);
-        // EventMgr_csjc.dispatch_csjc(EventDef_csjc.Camera_Event_csjc, { CameraOffset: new Laya.Vector3(0, 20, 10), CameraViewForward: 0 });
+        EventMgr_csjc.regEvent_csjc(EventDef_csjc.AttackInput,this,this.Hited);
+        //测试为30
+        this._hpSum = 30
+        this._hp = this._hpSum
+    }
+
+    public Hited(data){
+        if(data.name==this.owner.name)
+        return
+        if (this.CurrentAni != "Hit Left") {
+            this._rigidBody3D.linearVelocity = new Laya.Vector3(0,0,0);
+            this._subState = KingkongSubState.Hited;
+        }
     }
 
     public DoBeforeLeaving(any?: any) {
@@ -134,18 +147,23 @@ export default class KingkingState extends BaseState {
                 case KingkongSubState.ThrowStone:
                     this.ThrowStoneMethod();
                     break;
+                case KingkongSubState.Hited:
+                    this.HitedMethod();
+                    break;
             }
         }
     }
 
     private AttackMethod() {
-        // console.log("-------------------攻击",this.Animator)
+        // console.log("-------------------攻击",this.owner.name)
 
         this.StopMove();
         this.characterCtr.StopSound();
         this._attackTimer -= Laya.timer.delta;
         let angle = 0;
         let spd = 1;
+        EventMgr_csjc.dispatch_csjc(EventDef_csjc.AttackInput, { name:this.owner.name })
+
         if (this.RockerAxis != null) {
             angle = (Math.atan2(this.RockerAxis.x, this.RockerAxis.y) / 3.14 * 180) + 180;
             spd = Math.min(1, Math.max(0.7, this.RockerAxis.distance(0, 0)));
@@ -161,12 +179,14 @@ export default class KingkingState extends BaseState {
                 this._attackTimer = 1400;
                 this.Animator.play("Attack Box");
                 this.CurrentAni = "Attack Box";
+                SoundMgr_csjc.instance_csjc.playSound_csjc("Attack Jaw");
+
             }
             else {
                 this._attackTimer = 1000;
                 this.Animator.play("Attack");
                 this.CurrentAni = "Attack";
-                // SoundMgr_csjc.instance_csjc.playSound_csjc("Attack Jaw");
+                SoundMgr_csjc.instance_csjc.playSound_csjc("Attack Jaw");
             }
         }
         else if (this._attackTimer <= 0) {
@@ -485,6 +505,21 @@ export default class KingkingState extends BaseState {
             EventMgr_csjc.dispatch_csjc(EventDef_csjc.CharacterNormal);
             this._subState = KingkongSubState.Idle;
         }
+    }
+
+    /**受击 */
+    HitedMethod(){
+            if (this.CurrentAni != "Hit Left") {
+                this.CurrentAni = "Hit Left";
+                this.Animator.speed = 1;
+                this.Animator.play("Hit Left");
+                this._hp-=1;
+            }
+            else if ((this.CurrentAni == "Hit Left" )&& this.Animator.getCurrentAnimatorPlayState(0).normalizedTime >= 1) {
+                EventMgr_csjc.dispatch_csjc(EventDef_csjc.CharacterNormal);
+                this._subState = KingkongSubState.Idle;
+                this._rigidBody3D.linearVelocity = new Laya.Vector3(0, 0, 0);
+            }
     }
     /**丢石头 */
     ThrowStoneMethod(){

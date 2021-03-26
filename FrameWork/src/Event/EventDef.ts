@@ -30,6 +30,8 @@ export enum EventDef_csjc
     AD_SidePopViewSwitch_csjc = "AD_SidePopViewSwitch_csjc",
     AD_ShowNativeAd = "AD_ShowNativeAd",
     Game_Input_csjc = "Game_Input",
+    AttackInput = "AttackInput",
+
     Camera_Event_csjc = "Camera_Event",
     Game_ShowScore_csjc = "Game_ShowScore",
     ChangeSkin = "ChangeSkin",

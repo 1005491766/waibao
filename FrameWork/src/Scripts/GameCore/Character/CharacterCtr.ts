@@ -5,21 +5,24 @@ import PterState from "../FsmStates/PterState";
 import SceneMgr_cscj from "../SceneMgr";
 import KingkingState from "../FsmStates/KingkingState";
 import { PlayerType } from "../Enums";
+import BaseState from "../FsmStates/BaseState";
 
 export default class CharacterCtr extends Laya.Script3D {
     get FollowObj(): Laya.Sprite3D { return this._followObj; }
     get StateId(): StateID { return this._fsm.CurrentStateID; }
+    get State():BaseState{ return this._fsmboss }
 
     protected _fsm: FSMSystem;
     protected _tRex: Laya.Sprite3D;
     protected _kingkong: Laya.Sprite3D;
     protected _playerKind:PlayerType
+    protected _fsmboss:BaseState
+
     // protected _pter: Laya.Sprite3D;
     protected _followObj: Laya.Sprite3D;
     onAwake() {
         this._tRex = this.owner.getChildByName("TRex") as Laya.Sprite3D;
         this._kingkong = this.owner.getChildByName("Kingkong") as Laya.Sprite3D;
-
         // this._pter = this.owner.getChildByName("PteroShort") as Laya.Sprite3D;
         this.MakeFsm();
     }
@@ -37,12 +40,15 @@ export default class CharacterCtr extends Laya.Script3D {
         if(SceneMgr_cscj.Instance.PlayerKind == PlayerType.TRex)
         {
             this._fsm.AddState(this._tRex.addComponent(TRexState));
+            this._fsmboss = this._tRex.getComponent(TRexState)
             this._kingkong.active=false
             this._playerKind = PlayerType.TRex
+            
         }
         else
         {
             this._fsm.AddState(this._kingkong.addComponent(KingkingState));
+            this._fsmboss = this._kingkong.getComponent(KingkingState)
             this._tRex.active=false
             this._playerKind = PlayerType.Kingkong
         }

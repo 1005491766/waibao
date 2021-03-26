@@ -9,6 +9,8 @@ export default abstract class BaseState extends FSMState {
     get Sprite3D(): Laya.Sprite3D { return this.owner as Laya.Sprite3D; }
     get Model(): Laya.Sprite3D { return this.owner.getChildAt(0) as Laya.Sprite3D; }
     get mOwner(): Laya.Sprite3D { return this.owner as Laya.Sprite3D; }
+    get Hp(): number {return  this._hp}
+    get HpSum(): number {return  this._hpSum}
 
     protected _rockerAxis: Laya.Point;
     private _rockerInputTimer: number = 0;
@@ -20,6 +22,9 @@ export default abstract class BaseState extends FSMState {
     private _upTimer: number = 0;
     private _downTimer: number = 0;
     private _throwstoneTimer: number = 0;
+
+    protected _hp:number;
+    protected _hpSum:number;
 
     protected _animator: Laya.Animator;
     protected _currentAni: string;

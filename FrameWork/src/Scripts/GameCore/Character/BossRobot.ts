@@ -14,12 +14,10 @@ export default class BossRobot extends CharacterCtr {
     get kingkong():Laya.Sprite3D{ return this._kingkong as Laya.Sprite3D}
     get Player(): Laya.Sprite3D { return SceneMgr_cscj.Instance.Player.FollowObj; }
     get AniSprite(): Laya.Sprite3D { return this._mowner.getChildAt(0)as Laya.Sprite3D }
-
     private _die: boolean = false;
     private _timer: number = 0;
     private _mowner : Laya.Sprite3D = null;
     private _ani : Laya.Animator = null;
-    private _fsmboss:BaseState
     private _rigidBody3D: Laya.Rigidbody3D;
     private _physicsComponent: Laya.PhysicsComponent;
     onEnable()
@@ -32,7 +30,7 @@ export default class BossRobot extends CharacterCtr {
         this._physicsComponent = this._mowner.getComponent(Laya.PhysicsComponent);
         // this._physicsComponent.collisionGroup = CollisionGroup.Obstacle;
         // this._physicsComponent.canCollideWith = CollisionGroup.None | CollisionGroup.Ground | CollisionGroup.Character;
-        // this._rigidBody3D.isKinematic = false
+        this._rigidBody3D.isKinematic = false
         
     }
     Input(point: Laya.Point) {
@@ -88,8 +86,8 @@ export default class BossRobot extends CharacterCtr {
             {
                 // console.log("----------------c查看角度",this._mowner.transform.rotationEuler.y)
                 this._ani.play("Walk");
-                this._rigidBody3D.linearVelocity = new Laya.Vector3(Math.sin(this.Sprite3D.transform.rotationEuler.y) * 5 ,
-                 this._rigidBody3D.linearVelocity.y, Math.cos(this.Sprite3D.transform.rotationEuler.y) * 5 );
+                this._rigidBody3D.linearVelocity = new Laya.Vector3(Math.sin(this.Sprite3D.transform.rotationEuler.y) * 8 ,
+                 this._rigidBody3D.linearVelocity.y, Math.cos(this.Sprite3D.transform.rotationEuler.y) * 8 );
             }
         }
         else {

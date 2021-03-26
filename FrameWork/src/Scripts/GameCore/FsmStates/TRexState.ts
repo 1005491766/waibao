@@ -15,12 +15,15 @@ enum TRexSubState {
     Jumping,
     Falling,
     Eating,
+    Hited
+
 }
 export default class TRexState extends BaseState {
     constructor() {
         super();
         this.AddTransition(Transition.Trex2Kingkong, StateID.TRex);
     }
+
     private _fire: Laya.Sprite3D;
     private _fireCol: Laya.PhysicsComponent;
     private _subState: TRexSubState = TRexSubState.Idle;
@@ -73,11 +76,23 @@ export default class TRexState extends BaseState {
         this.characterCtr.SetFollowObj(this.Sprite3D);
         this.Animator.play("End Sleeping");
         EventMgr_csjc.dispatch_csjc(EventDef_csjc.TransformEvent, [false]);
-
+        EventMgr_csjc.regEvent_csjc(EventDef_csjc.AttackInput,this,this.Hited);
+        //初步测试用30
+        this._hpSum = 30
+        this._hp = this._hpSum
 
         // EventMgr_csjc.dispatch_csjc(EventDef_csjc.Camera_Event_csjc, { CameraOffset: new Laya.Vector3(0, 20, 10), CameraViewForward: 0 });
     }
 
+    /**受击 */
+    public Hited(data){
+        if(data.name==this.owner.name)
+        return
+        if (this.CurrentAni != "End Sleeping") {
+            this._rigidBody3D.linearVelocity = new Laya.Vector3(0,0,0);
+            this._subState = TRexSubState.Hited;
+        }
+    }
     public DoBeforeLeaving(any?: any) {
         this._subState = TRexSubState.Idle;
         this.characterCtr.StopSound();
@@ -125,6 +140,8 @@ export default class TRexState extends BaseState {
                     break;
                 case TRexSubState.Eating:
                     this.EatingMethod();
+                case TRexSubState.Hited:
+                    this.HitedMethod();
                     break;
             }
         }
@@ -136,6 +153,7 @@ export default class TRexState extends BaseState {
         this._attackTimer -= Laya.timer.delta;
         let angle = 0;
         let spd = 1;
+        EventMgr_csjc.dispatch_csjc(EventDef_csjc.AttackInput, { name:this.owner.name })
         if (this.RockerAxis != null) {
             angle = (Math.atan2(this.RockerAxis.x, this.RockerAxis.y) / 3.14 * 180) + 180;
             spd = Math.min(1, Math.max(0.7, this.RockerAxis.distance(0, 0)));
@@ -508,15 +526,29 @@ export default class TRexState extends BaseState {
             SoundMgr_csjc.instance_csjc.playSound_csjc("Eating");
         }
 
-        console.log("----------------我是恐龙攻击我",enemy.name)
+        // console.log("----------------我是恐龙攻击我",enemy.name)
         // if()
     }
 
-    onTriggerEnter(res) {
-        // res.owner.name
-        console.log("----------------我是恐龙攻击我",res.owner.name)
 
-    }
+    
+    /**受击 */
+    HitedMethod(){
+        if (this.CurrentAni != "End Sleeping") {
+            this.CurrentAni = "End Sleeping";
+            this.Animator.speed = 3;
+            this.Animator.play("End Sleeping");
+            this._hp-=1;
+            console.log("----------------扣血",this._hp)
+        }
+        else if ((this.CurrentAni == "End Sleeping" )&& this.Animator.getCurrentAnimatorPlayState(0).normalizedTime >= 1) {
+            EventMgr_csjc.dispatch_csjc(EventDef_csjc.CharacterNormal);
+            this._subState = TRexSubState.Idle;
+            this._rigidBody3D.linearVelocity = new Laya.Vector3(0, 0, 0);
+        }
+}
+
+    /**进食 */
     EatingMethod() {
         this.characterCtr.StopSound();
         if (this.CurrentAni != "Eating") {

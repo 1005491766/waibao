@@ -11,6 +11,7 @@ import Bullet from "./Character/Bullet";
 import BossRobot from "./Character/BossRobot";
 import { PlayerType, CollisionGroup } from "./Enums";
 import DestructibleObjBuilds from "./Character/DestructibleObjBuilds";
+import PoolManager from "./GameTools/PoolManager";
 
 
 export default class SceneMgr_cscj extends Laya.Script3D {
@@ -33,6 +34,7 @@ export default class SceneMgr_cscj extends Laya.Script3D {
     get CurrLockEnemy(): Laya.Sprite3D { return this._currLockEnemy; }
     get CurrLockEnemyPos(): Laya.Vector3 { return this._currLockEnemyPos; }
     get StateId(): StateID { return this.Player.StateId }
+    get Prefab():Laya.Sprite3D{return this._prefabMain}
 
     get PlayerKind(): number { return this._playerKind}
     set PlayerKind(kind) { this._playerKind = kind}
@@ -61,6 +63,11 @@ export default class SceneMgr_cscj extends Laya.Script3D {
     private _currLockEnemyPos: Laya.Vector3;
     private _stateId: StateID;
 
+    /**
+     *  预制体
+     */
+    private _prefabMain:Laya.Sprite3D
+
     private _playerKind:PlayerType = PlayerType.TRex;
     private _bossKind:PlayerType = PlayerType.TRex;
 
@@ -74,10 +81,21 @@ export default class SceneMgr_cscj extends Laya.Script3D {
 
         this.Camera = this.owner.getChildByName("Main Camera") as Laya.Sprite3D;
         this._cameraCtr = this.Camera.addComponent(CameraCtr) as CameraCtr;
-
+        this._prefabMain = this.owner.getChildByName("Prefab") as Laya.Sprite3D;
 
         this._restTimer = 150;
         this.InitGameObjects();
+        this.prefabMgr()
+    }
+
+    /**
+     * 预制体管理
+     */
+    prefabMgr()
+    {
+        this._prefabMain.active = false
+        //石头
+        PoolManager.getInstance().InitPool(1,this._prefabMain.getChildAt(0)); 
     }
 
     onEnable() {
@@ -244,7 +262,6 @@ export default class SceneMgr_cscj extends Laya.Script3D {
     }
 
     CreatEnemy() {
-
         this._enemyPrefab = this.owner.getChildByName("Enemys").getChildAt(0) as Laya.Sprite3D;
         let enemyAll = this.owner.getChildByName("EnemyAllList") as Laya.Sprite3D;
         let enemyEx = this.owner.getChildByName("EnemyExList") as Laya.Sprite3D;

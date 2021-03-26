@@ -565,9 +565,9 @@
 					"isStatic":false,
 					"layer":0,
 					"position":[
-						9,
 						0,
-						9
+						0,
+						0
 					],
 					"rotation":[
 						0,
@@ -611,7 +611,7 @@
 							{
 								"type":"Rigidbody3D",
 								"mass":100,
-								"isKinematic":false,
+								"isKinematic":true,
 								"restitution":0,
 								"friction":0.5,
 								"rollingFriction":0,
@@ -1268,7 +1268,7 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0,
+												-1.370907E-07,
 												5.175957,
 												4.061654
 											],
@@ -1325,7 +1325,7 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												0,
+												-1.773942E-15,
 												3.919031,
 												-8.015479
 											],
@@ -1442,7 +1442,7 @@
 							"position":[
 								0,
 								0,
-								-29
+								0
 							],
 							"rotation":[
 								0,
@@ -1460,7 +1460,7 @@
 							{
 								"type":"Rigidbody3D",
 								"mass":100,
-								"isKinematic":false,
+								"isKinematic":true,
 								"restitution":0,
 								"friction":0.5,
 								"rollingFriction":0,
@@ -1520,6 +1520,9 @@
 											"linkSprites":{
 												"Attack1_Kingkong":[
 													"Attack1_Kingkong"
+												],
+												"AtkStone":[
+													"AtkStone"
 												]
 											}
 										},
@@ -1633,9 +1636,9 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												5.960464E-08,
+												0,
 												-2.866903E-09,
-												2.384186E-07
+												0
 											],
 											"rotation":[
 												0,
@@ -1688,9 +1691,9 @@
 											"isStatic":false,
 											"layer":0,
 											"position":[
-												5.960464E-08,
+												1.367485E-08,
 												1.676597,
-												-0.04464396
+												-0.04464433
 											],
 											"rotation":[
 												-1.017103E-15,
@@ -1730,6 +1733,56 @@
 														],
 														"radius":4.41,
 														"height":10.79
+													}
+												],
+												"isTrigger":true
+											}
+										],
+										"child":[]
+									},
+									{
+										"type":"Sprite3D",
+										"props":{
+											"name":"AtkStone",
+											"active":true,
+											"isStatic":false,
+											"layer":0,
+											"position":[
+												-1.475554,
+												1.543353,
+												-0.04900206
+											],
+											"rotation":[
+												0.03545939,
+												-0.01998185,
+												0.2511357,
+												-0.9670957
+											],
+											"scale":[
+												1,
+												1,
+												0.9999999
+											]
+										},
+										"components":[
+											{
+												"type":"PhysicsCollider",
+												"restitution":0,
+												"friction":0.5,
+												"rollingFriction":0,
+												"shapes":[
+													{
+														"type":"BoxColliderShape",
+														"center":[
+															0,
+															0,
+															0
+														],
+														"size":[
+															0.1,
+															0.1,
+															0.1
+														]
 													}
 												],
 												"isTrigger":true
@@ -15997,39 +16050,13 @@
 										"type":"BoxColliderShape",
 										"center":[
 											0,
-											20.5,
-											0
+											33.45429,
+											0.2607889
 										],
 										"size":[
 											8.5,
-											14.5,
-											13.8
-										]
-									},
-									{
-										"type":"BoxColliderShape",
-										"center":[
-											0,
-											34.25,
-											0
-										],
-										"size":[
-											6,
-											13,
-											11
-										]
-									},
-									{
-										"type":"BoxColliderShape",
-										"center":[
-											0,
-											47,
-											0
-										],
-										"size":[
-											5,
-											13,
-											8
+											40.40858,
+											11.52373
 										]
 									}
 								],
@@ -17292,39 +17319,13 @@
 										"type":"BoxColliderShape",
 										"center":[
 											0,
-											20.5,
-											0
+											33.45429,
+											0.2607889
 										],
 										"size":[
 											8.5,
-											14.5,
-											13.8
-										]
-									},
-									{
-										"type":"BoxColliderShape",
-										"center":[
-											0,
-											34.25,
-											0
-										],
-										"size":[
-											6,
-											13,
-											11
-										]
-									},
-									{
-										"type":"BoxColliderShape",
-										"center":[
-											0,
-											47,
-											0
-										],
-										"size":[
-											5,
-											13,
-											8
+											40.40858,
+											11.52373
 										]
 									}
 								],
@@ -22567,7 +22568,7 @@
 							"position":[
 								-29.15,
 								8.83,
-								25.62
+								20.18
 							],
 							"rotation":[
 								0,
@@ -22619,7 +22620,7 @@
 							"isStatic":false,
 							"layer":0,
 							"position":[
-								-32,
+								-35.54,
 								0,
 								9
 							],
@@ -22646,7 +22647,7 @@
 							"isStatic":false,
 							"layer":0,
 							"position":[
-								44,
+								58.23,
 								0,
 								9
 							],
@@ -22673,7 +22674,7 @@
 							"isStatic":false,
 							"layer":0,
 							"position":[
-								-65,
+								-82.1,
 								0,
 								-7
 							],
@@ -22729,8 +22730,8 @@
 					"isStatic":true,
 					"layer":0,
 					"position":[
-						120,
-						-0.01,
+						169.9,
+						-1.1,
 						-120
 					],
 					"rotation":[
@@ -22754,6 +22755,129 @@
 				},
 				"components":[],
 				"child":[]
+			},
+			{
+				"type":"Sprite3D",
+				"props":{
+					"name":"Prefab",
+					"active":true,
+					"isStatic":false,
+					"layer":0,
+					"position":[
+						31.60465,
+						29.80019,
+						-25.55667
+					],
+					"rotation":[
+						0,
+						0,
+						0,
+						-1
+					],
+					"scale":[
+						1,
+						1,
+						1
+					]
+				},
+				"components":[],
+				"child":[
+					{
+						"type":"Sprite3D",
+						"props":{
+							"name":"cone",
+							"active":true,
+							"isStatic":false,
+							"layer":0,
+							"position":[
+								-11.60465,
+								-29.80019,
+								25.55667
+							],
+							"rotation":[
+								0,
+								0,
+								0,
+								-1
+							],
+							"scale":[
+								1,
+								1,
+								1
+							]
+						},
+						"components":[
+							{
+								"type":"Rigidbody3D",
+								"mass":100,
+								"isKinematic":false,
+								"restitution":0,
+								"friction":0.5,
+								"rollingFriction":0,
+								"linearDamping":0,
+								"angularDamping":0,
+								"overrideGravity":false,
+								"gravity":[
+									0,
+									0,
+									0
+								],
+								"shapes":[
+									{
+										"type":"BoxColliderShape",
+										"center":[
+											0,
+											1.5,
+											0
+										],
+										"size":[
+											2,
+											3,
+											2
+										]
+									}
+								],
+								"isTrigger":false
+							}
+						],
+						"child":[
+							{
+								"type":"MeshSprite3D",
+								"props":{
+									"name":"cone",
+									"active":true,
+									"isStatic":false,
+									"layer":0,
+									"position":[
+										0,
+										0,
+										0
+									],
+									"rotation":[
+										0.7071068,
+										0,
+										0,
+										-0.7071068
+									],
+									"scale":[
+										1,
+										1,
+										1
+									],
+									"meshPath":"Assets/city/Game object/Road/cone-Cone001.lm",
+									"enableRender":true,
+									"materials":[
+										{
+											"path":"Assets/city/Materials/Atlas sign B.lmat"
+										}
+									]
+								},
+								"components":[],
+								"child":[]
+							}
+						]
+					}
+				]
 			}
 		]
 	}

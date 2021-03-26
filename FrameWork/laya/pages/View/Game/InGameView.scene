@@ -2,11 +2,11 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
-    "selecteID":147,
+    "selecteID":94,
     "searchKey":"View",
     "props":{"width":1334,"top":0,"sceneColor":"#000000","right":0,"left":0,"height":750,"bottom":0},
     "nodeParent":-1,
-    "maxID":149,
+    "maxID":155,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -941,7 +941,7 @@
                     "x":30,
                     "type":"Image",
                     "searchKey":"Image",
-                    "props":{"y":2,"x":2,"skin":"GamePlaying/boss_xuetiao_jingang.png"},
+                    "props":{"y":2,"x":2,"width":400,"skin":"GamePlaying/boss_xuetiao_jingang.png"},
                     "nodeParent":147,
                     "label":"Image",
                     "isOpen":true,
@@ -961,6 +961,48 @@
                             "isAniNode":true,
                             "hasChild":false,
                             "compId":148,
+                            "child":[
+                                ]
+                        }]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Image",
+            "searchKey":"Image,Playerprogress",
+            "props":{"y":114,"skin":"GamePlaying/boss_xuetiao_db.png","name":"Playerprogress","centerX":0},
+            "nodeParent":2,
+            "label":"Playerprogress",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":152,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"y":2,"x":2,"width":400,"skin":"GamePlaying/boss_xuetiao_long.png"},
+                    "nodeParent":152,
+                    "label":"Image",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":153,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "searchKey":"Image",
+                            "props":{"y":8,"width":76,"skin":"GamePlaying/touxiang_long.png","right":-58,"pivotY":38,"height":76},
+                            "nodeParent":153,
+                            "label":"Image",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":154,
                             "child":[
                                 ]
                         }]

@@ -9,6 +9,7 @@ import TmAPI from "../../TmAPI/TmAPI";
 import ExamineMgr from "../../CommomAPI/ExamineMgr";
 import CachedWXBannerAd_csjc from "../../PlatformApi/CachedWXBannerAd";
 import Camera2UI from "../../Scripts/GameCore/Camera2UI";
+import { PlayerType } from "../../Scripts/GameCore/Enums";
 
 export default class InGameView extends ViewBase_csjc {
     private _moreGameBtn: Laya.Image;
@@ -17,12 +18,20 @@ export default class InGameView extends ViewBase_csjc {
     private _fail: Laya.Image;
     private _tutorialBtn: Laya.Image;
     private _pros:Laya.Image;
+    private _prosSpeedOf:Laya.Image;
+
+    private _playerPros:Laya.Image;
+    private _playerProsSpeedOf:Laya.Image;
 
     onAwake() {
         this._moreGameBtn = this.owner.getChildByName("MoreGameBtn") as Laya.Image;
         this._tutorialBtn = this.owner.getChildByName("TutorialBtn") as Laya.Image;
         this._complete = this.owner.getChildByName("Complete") as Laya.Image;
         this._pros = this.owner.getChildByName("progress") as Laya.Image;
+        this._prosSpeedOf = this._pros.getChildAt(0) as Laya.Image;
+        this._playerPros = this.owner.getChildByName("Playerprogress") as Laya.Image;
+        this._playerProsSpeedOf = this._playerPros.getChildAt(0) as Laya.Image;
+
         this._fail = this.owner.getChildByName("Fail") as Laya.Image;
         this._complete.visible = false;
         this._fail.visible = false;
@@ -34,6 +43,32 @@ export default class InGameView extends ViewBase_csjc {
     addEvent() {
         this._tutorialBtn.on(Laya.Event.CLICK, this, this.OnTutorialBtn);
         this._moreGameBtn.on(Laya.Event.CLICK, this, this.OnMoreGameBtn);
+        EventMgr_csjc.regEvent_csjc(EventDef_csjc.SelectHero, this, this.OnSelectHero);
+
+    }
+    removeEvent(){
+        EventMgr_csjc.removeEvent_csjc(EventDef_csjc.SelectHero, this, this.OnSelectHero);
+
+    }
+    /**监听选择英雄 */
+    OnSelectHero(){
+        if(SceneMgr_cscj.Instance.PlayerKind == PlayerType.Kingkong)
+        {
+            this._playerProsSpeedOf.skin = "GamePlaying/boss_xuetiao_jingang.png";
+            (this._playerProsSpeedOf.getChildAt(0) as Laya.Image).skin = "GamePlaying/touxiang_jingang.png";
+
+            this._prosSpeedOf.skin = "GamePlaying/boss_xuetiao_long.png";
+            (this._prosSpeedOf.getChildAt(0) as Laya.Image).skin = "GamePlaying/touxiang_long.png";
+        }
+        else{
+            this._playerProsSpeedOf.skin = "GamePlaying/boss_xuetiao_long.png";
+            (this._playerProsSpeedOf.getChildAt(0) as Laya.Image).skin = "GamePlaying/touxiang_long.png";
+
+            this._prosSpeedOf.skin = "GamePlaying/boss_xuetiao_jingang.png";
+            (this._prosSpeedOf.getChildAt(0) as Laya.Image).skin = "GamePlaying/touxiang_jingang.png";
+        }
+
+
     }
 
     onStart() {
@@ -41,7 +76,6 @@ export default class InGameView extends ViewBase_csjc {
         if (User_csjc.getLeveNum_csjc() == 1) {
             TmAPI.SendEvent("GameStep", { Step: 2 });
         }
-
         // Scene3dMgr.Camera.viewport.project(Scene3dMgr.Monster.transform.position, Scene3dMgr.Camera.projectionViewMatrix, this.outpos)
         // subNum.pos(this.outpos.x / Laya.stage.clientScaleX ,this.outpos.y / Laya.stage.clientScaleY)
     }
@@ -79,13 +113,10 @@ export default class InGameView extends ViewBase_csjc {
             let cent = new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2);
             let pos = SceneMgr_cscj.Instance.BossSprite3D.transform.position.clone();
             pos.y += 2;
-            pos = Camera2UI.WorldToScreen2(SceneMgr_cscj.Instance.Camera, SceneMgr_cscj.Instance.BossSprite3D.transform.position)
+            pos = Camera2UI.WorldToScreen2(SceneMgr_cscj.Instance.Camera, (SceneMgr_cscj.Instance.BossSprite3D.getChildAt(0) as Laya.Sprite3D).transform.position)
             this._pros.x = pos.x-300
             this._pros.y = pos.y-100
-
-            let inRange =
-            (pos.x > Laya.stage.width * 0.25) && (pos.x < Laya.stage.width * 0.75) 
-
+            this.onCheckPros()
         }
         if (this._gameOver || SceneMgr_cscj.Instance.GameOver == 0) return;
         this._gameOver = true;
@@ -103,10 +134,15 @@ export default class InGameView extends ViewBase_csjc {
                 this.GameOver(false);
             }
         })
-
-
     }
 
+    onCheckPros()
+    {
+        this._playerProsSpeedOf.width = 400* SceneMgr_cscj.Instance.Player.State.Hp/SceneMgr_cscj.Instance.Player.State.HpSum
+        // console.log("--------------------boss血量",SceneMgr_cscj.Instance.Boss.State.Hp)
+        this._prosSpeedOf.width = 400* SceneMgr_cscj.Instance.Boss.State.Hp/SceneMgr_cscj.Instance.Boss.State.HpSum
+
+    }
     GameOver(win: boolean) {
         this.closeView();
         if (ExamineMgr.CanDoScz_Wx) {

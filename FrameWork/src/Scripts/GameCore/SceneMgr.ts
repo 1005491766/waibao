@@ -28,13 +28,16 @@ export default class SceneMgr_cscj extends Laya.Script3D {
     get EnemyLocList(): Array<any> { return this._enemyLocList; }
     get EnemCount(): number { return this._enemyCount; }
     get EnemyKillCount(): number { return this._enemyKillCount; }
-    get GameOver(): number { return this._gameOver; }
     get CameraCtr(): CameraCtr { return this._cameraCtr; }
     get FireEffects(): Array<Laya.Sprite3D> { return this._fireEffects; }
     get CurrLockEnemy(): Laya.Sprite3D { return this._currLockEnemy; }
     get CurrLockEnemyPos(): Laya.Vector3 { return this._currLockEnemyPos; }
     get StateId(): StateID { return this.Player.StateId }
     get Prefab():Laya.Sprite3D{return this._prefabMain}
+    get GameOver(): number { return this._gameOver; }
+    set GameOver(v)  { this._gameOver = v; }
+    get BossVisible() { return this._bossIsVivible; }
+    set BossVisible(v) {  this._bossIsVivible=v; }
 
     get PlayerKind(): number { return this._playerKind}
     set PlayerKind(kind) { this._playerKind = kind}
@@ -62,6 +65,7 @@ export default class SceneMgr_cscj extends Laya.Script3D {
     private _currLockEnemy: Laya.Sprite3D;
     private _currLockEnemyPos: Laya.Vector3;
     private _stateId: StateID;
+    private _bossIsVivible:boolean
 
     /**
      *  预制体
@@ -95,7 +99,9 @@ export default class SceneMgr_cscj extends Laya.Script3D {
     {
         this._prefabMain.active = false
         //石头
-        PoolManager.getInstance().InitPool(1,this._prefabMain.getChildAt(0)); 
+        PoolManager.getInstance().InitPool(0,this._prefabMain.getChildAt(0)); 
+        console.log("-*---------------------对象池获取",this._prefabMain.getChildAt(0))
+
     }
 
     onEnable() {
@@ -128,24 +134,41 @@ export default class SceneMgr_cscj extends Laya.Script3D {
         let boss = this.owner.getChildByName("Boss") as Laya.Sprite3D;
         boss = player.clone()as Laya.Sprite3D
         this.owner.addChild(boss)
+        boss.transform.localPositionY+=5
         boss.transform.position = new Laya.Vector3(0,0,0)
         boss.name = "boss"
         this._playerCtr = player.addComponent(CharacterCtr);
         this._boss = boss.addComponent(BossRobot);
-
         this._playerLoc = this.owner.getChildByName("PlayerLoc") as Laya.Sprite3D;
-        if (User_csjc.getLeveNum_csjc() > 1) {
+        if (User_csjc.getLeveNum_csjc() >= 1) {
             let index = Math.floor(Math.random() * this._playerLoc.numChildren);
             let loc = this._playerLoc.getChildAt(index) as Laya.Sprite3D;
             this._playerCtr.FollowObj.transform.worldMatrix = loc.transform.worldMatrix.clone();
         }
+        this.BossSprite3D.active = false
+        this._bossIsVivible = false
+
+        // this.BossSprite3D.transform.localPositionY=5// = true
+
+
     }
 
     OnEnemyDead() {
         this._enemyKillCount++;
+        // this._enemyCount = 1
         if (this._enemyKillCount >= this._enemyCount) {
-
+            EventMgr_csjc.dispatch_csjc(EventDef_csjc.BossVisible);
+            this.onBossVisible()
         }
+    }
+    /**
+     * boss出现
+     */
+    onBossVisible()
+    {
+        this.BossSprite3D.active = true
+        this._bossIsVivible = true
+        // this.BossSprite3D.transform.localPositionY=0
     }
 
     PauseGame() {
@@ -161,7 +184,7 @@ export default class SceneMgr_cscj extends Laya.Script3D {
         this._restTimer -= Math.min(50, Laya.timer.delta) / 1000;
         if (this._restTimer <= 0) {
             this._restTimer = 0;
-            this._gameOver = -1;
+            this.GameOver = -1;
         }
         this.CaEnemyLoc();
     }
@@ -202,9 +225,9 @@ export default class SceneMgr_cscj extends Laya.Script3D {
      * @memberof ryw_SceneManager
      */
     public Input_csjc(point: Laya.Point) {
-        // if (this._gameOver || this.Provoking) {
-        //     return;
-        // }
+        if (this._gameOver ) {
+            return;
+        }
         if (point == null) {
             console.log("停止输入");
             // this._player.Input(point);

@@ -15,10 +15,15 @@ export default class DestructibleObjBuilds extends DestructibleObj {
         let replace = SceneMgr_cscj.Instance.ReplaceObj.getChildByName(this.owner.name + "Replace") as Laya.Sprite3D;
         let ani = replace.getComponent(Laya.Animator) as Laya.Animator;
         ani.play(null, 0, 0);
+        replace.active=true
+
         replace.transform.worldMatrix = this.Sprite3D.transform.worldMatrix;
         if (this._timer < 0) {
             this._timer = 0;
         }
+        Laya.timer.once(3000,this,()=>{
+            replace.active=false
+        })
         this._isbreak = true
         // this._physicsComponent.enabled = false;
     }

@@ -2,11 +2,11 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
-    "selecteID":44,
+    "selecteID":8,
     "searchKey":"View",
     "props":{"width":1334,"top":0,"sceneColor":"#000000","right":0,"left":0,"height":750,"bottom":0},
     "nodeParent":-1,
-    "maxID":60,
+    "maxID":61,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -18,29 +18,16 @@
             "x":15,
             "type":"Image",
             "searchKey":"Image,BG",
-            "props":{"top":0,"skin":"Kd/beijing.jpg","right":0,"name":"BG","left":0,"bottom":0},
+            "props":{"top":0,"skin":"SelectHero/tongyongbeijing.jpg","right":0,"name":"BG","left":0,"bottom":0},
             "nodeParent":2,
             "label":"BG",
-            "isOpen":false,
-            "isDirectory":true,
+            "isOpen":true,
+            "isDirectory":false,
             "isAniNode":true,
-            "hasChild":true,
+            "hasChild":false,
             "compId":3,
             "child":[
-                {
-                    "type":"Image",
-                    "searchKey":"Image",
-                    "props":{"top":0,"skin":"Kd/img_jiesuan_2.png","left":0},
-                    "nodeParent":3,
-                    "label":"Image",
-                    "isOpen":true,
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":35,
-                    "child":[
-                        ]
-                }],
+                ],
             "$HIDDEN":false
         },
         {
@@ -60,10 +47,25 @@
         {
             "x":15,
             "type":"Image",
+            "searchKey":"Image",
+            "props":{"y":285,"skin":"Kd/guang.png","centerX":0},
+            "nodeParent":2,
+            "label":"Image",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":60,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Image",
             "searchKey":"Image,Treasure",
             "props":{"y":350,"skin":"Kd/baoxiang.png","rotation":0,"name":"Treasure","centerX":0,"bottom":250,"anchorY":0.5,"anchorX":0.5},
             "nodeParent":2,
             "label":"Treasure",
+            "isOpen":true,
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
@@ -74,47 +76,18 @@
         {
             "x":15,
             "type":"Image",
-            "searchKey":"Image",
-            "props":{"skin":"Kd/1.png","skewX":0,"rotation":0,"centerX":0,"bottom":174,"anchorY":0.5,"anchorX":0.5},
-            "nodeParent":2,
-            "label":"Image",
-            "isOpen":false,
-            "isDirectory":true,
-            "isAniNode":true,
-            "hasChild":true,
-            "compId":41,
-            "child":[
-                {
-                    "type":"Script",
-                    "switchAble":true,
-                    "source":"src/View/AlphaBreathingAni.ts",
-                    "searchKey":"Script,AlphaBreathingAni",
-                    "removeAble":true,
-                    "props":{},
-                    "nodeParent":41,
-                    "label":"AlphaBreathingAni",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":42,
-                    "child":[
-                        ]
-                }]
-        },
-        {
-            "x":15,
-            "type":"Image",
             "searchKey":"Image,Progress",
             "props":{"y":630,"width":688,"skin":"Kd/jindu2.png","name":"Progress","height":50,"centerX":0},
             "nodeParent":2,
             "label":"Progress",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":18,
             "child":[
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,Bar",
                     "props":{"y":0,"x":0,"width":688,"skin":"Kd/jindu1.png","sizeGrid":"0,50,0,50","name":"Bar","height":50},
@@ -127,19 +100,6 @@
                     "child":[
                         ],
                     "$HIDDEN":false
-                },
-                {
-                    "type":"Sprite",
-                    "searchKey":"Sprite",
-                    "props":{"y":-34,"x":244,"texture":"Kd/kaiqijindu.png","scaleY":1.5,"scaleX":1.5},
-                    "nodeParent":18,
-                    "label":"Sprite",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":40,
-                    "child":[
-                        ]
                 }],
             "$HIDDEN":false
         },
@@ -200,25 +160,12 @@
                     "nodeParent":8,
                     "label":"Image",
                     "isOpen":true,
-                    "isDirectory":true,
+                    "isDirectory":false,
                     "isAniNode":true,
-                    "hasChild":true,
+                    "hasChild":false,
                     "compId":38,
                     "child":[
-                        {
-                            "x":45,
-                            "type":"Sprite",
-                            "searchKey":"Sprite",
-                            "props":{"y":198,"x":-31,"texture":"Kd/click.png"},
-                            "nodeParent":38,
-                            "label":"Sprite",
-                            "isDirectory":false,
-                            "isAniNode":true,
-                            "hasChild":false,
-                            "compId":54,
-                            "child":[
-                                ]
-                        }]
+                        ]
                 }],
             "$HIDDEN":false
         },

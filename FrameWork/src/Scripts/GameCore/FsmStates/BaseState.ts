@@ -26,6 +26,7 @@ export default abstract class BaseState extends FSMState {
     protected _hp:number;
     protected _hpSum:number;
 
+    protected _isHited = false
     protected _animator: Laya.Animator;
     protected _currentAni: string;
     protected ray: Laya.Ray = new Laya.Ray(new Laya.Vector3(), new Laya.Vector3());

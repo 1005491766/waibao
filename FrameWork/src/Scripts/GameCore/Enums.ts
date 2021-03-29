@@ -44,6 +44,9 @@ export enum CollisionGroup {
     Character = Math.pow(2, 0),
     Obstacle = Math.pow(2, 1),
     Ground = Math.pow(2, 3),
+    Kingkong = Math.pow(2, 4),
+    TRex = Math.pow(2, 5),
+
 }
 
 export enum SkinState {

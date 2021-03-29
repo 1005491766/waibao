@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
-    "selecteID":19,
+    "selecteID":14,
     "searchKey":"View",
     "props":{"zOrder":10,"width":1334,"top":0,"sceneColor":"#000000","right":0,"mouseThrough":false,"left":0,"height":750,"bottom":0},
     "nodeParent":-1,
@@ -32,96 +32,6 @@
         {
             "x":15,
             "type":"Image",
-            "searchKey":"Image",
-            "props":{"width":297,"top":-738,"skin":"LoadingView/jiqiren.png","scaleY":2,"scaleX":2,"left":-115,"height":328},
-            "nodeParent":2,
-            "label":"Image",
-            "isOpen":false,
-            "isDirectory":true,
-            "isAniNode":true,
-            "hasChild":true,
-            "compId":21,
-            "child":[
-                {
-                    "type":"Script",
-                    "switchAble":true,
-                    "source":"src/View/AlphaBreathingAni.ts",
-                    "searchKey":"Script,AlphaBreathingAni",
-                    "removeAble":true,
-                    "props":{"MinAlpha":0.8,"BreathingSpeed_csjc":0.3},
-                    "nodeParent":21,
-                    "label":"AlphaBreathingAni",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":22,
-                    "child":[
-                        ]
-                }],
-            "$HIDDEN":false
-        },
-        {
-            "x":15,
-            "type":"Image",
-            "searchKey":"Image",
-            "props":{"skin":"LoadingView/qiang_1.png","left":0,"bottom":0},
-            "nodeParent":2,
-            "label":"Image",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":28,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"Image",
-            "searchKey":"Image",
-            "props":{"width":374,"skin":"LoadingView/long1.png","scaleY":2,"scaleX":2,"right":-170,"height":348,"bottom":771},
-            "nodeParent":2,
-            "label":"Image",
-            "isOpen":false,
-            "isDirectory":true,
-            "isAniNode":true,
-            "hasChild":true,
-            "compId":19,
-            "child":[
-                {
-                    "type":"Script",
-                    "switchAble":true,
-                    "source":"src/View/AlphaBreathingAni.ts",
-                    "searchKey":"Script,AlphaBreathingAni",
-                    "removeAble":true,
-                    "props":{"MinAlpha":0.8,"BreathingSpeed_csjc":0.3},
-                    "nodeParent":19,
-                    "label":"AlphaBreathingAni",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":20,
-                    "child":[
-                        ]
-                }],
-            "$HIDDEN":false
-        },
-        {
-            "x":15,
-            "type":"Image",
-            "searchKey":"Image",
-            "props":{"skin":"LoadingView/qiang_2.png","right":0,"bottom":0},
-            "nodeParent":2,
-            "label":"Image",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":29,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"Image",
             "searchKey":"Image,Logo",
             "props":{"width":415,"top":158,"skin":"LoadingView/logo.png","pivotY":70,"pivotX":208,"name":"Logo","height":140,"centerX":0},
             "nodeParent":2,
@@ -130,21 +40,6 @@
             "isAniNode":true,
             "hasChild":false,
             "compId":12,
-            "child":[
-                ],
-            "$HIDDEN":false
-        },
-        {
-            "x":15,
-            "type":"Image",
-            "searchKey":"Image",
-            "props":{"skin":"LoadingView/zg.png","scaleY":0.7,"scaleX":0.7,"centerX":-100,"bottom":-229,"anchorY":0.5,"anchorX":0.5},
-            "nodeParent":2,
-            "label":"Image",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":14,
             "child":[
                 ],
             "$HIDDEN":false

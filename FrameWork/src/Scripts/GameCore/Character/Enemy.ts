@@ -72,6 +72,8 @@ export default class Enemy extends Laya.Script3D {
     // }
 
     onCollisionEnter(collision: Laya.Collision) {
+        console.log("--------------吃物品xxxx",collision.other.owner.name)
+
         if (this._die) return;
         /* if (collision.other.owner.name.search("Attack") > -1 || collision.other.owner.name.search("-Car") > -1 || collision.other.owner.name.search("-Robot") > -1)  */{
             SoundMgr_csjc.instance_csjc.playSound_csjc("Broken");

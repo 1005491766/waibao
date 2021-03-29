@@ -1,0 +1,8 @@
+{
+	"front":"sky-7_PositiveZ.png",
+	"back":"sky-7_NegativeZ.png",
+	"left":"sky-7_PositiveX.png",
+	"right":"sky-7_NegativeX.png",
+	"up":"sky-7_PositiveY.png",
+	"down":"sky-7_NegativeY.png"
+}

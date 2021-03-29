@@ -30,6 +30,10 @@ export enum EventDef_csjc
     AD_SidePopViewSwitch_csjc = "AD_SidePopViewSwitch_csjc",
     AD_ShowNativeAd = "AD_ShowNativeAd",
     Game_Input_csjc = "Game_Input",
+    /**
+     * name 攻击者名字
+     * v3 攻击者坐标
+     */
     AttackInput = "AttackInput",
 
     Camera_Event_csjc = "Camera_Event",
@@ -41,7 +45,8 @@ export enum EventDef_csjc
      * 英雄选择完毕
      */
     SelectHero ="SelectHero",
-
+    /**boss出现 */
+    BossVisible = "BossVisible",
     EnemyDead = "EnemyDead",
     EnemyLock = "EnemyLock",
     CharacterFalling  = "CharacterFalling",

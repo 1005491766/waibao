@@ -22,6 +22,7 @@ export default class InGameView extends ViewBase_csjc {
 
     private _playerPros:Laya.Image;
     private _playerProsSpeedOf:Laya.Image;
+    private _selecetKind = 0
 
     onAwake() {
         this._moreGameBtn = this.owner.getChildByName("MoreGameBtn") as Laya.Image;
@@ -31,6 +32,9 @@ export default class InGameView extends ViewBase_csjc {
         this._prosSpeedOf = this._pros.getChildAt(0) as Laya.Image;
         this._playerPros = this.owner.getChildByName("Playerprogress") as Laya.Image;
         this._playerProsSpeedOf = this._playerPros.getChildAt(0) as Laya.Image;
+
+        this._pros.visible =false
+        this._playerPros.visible =false
 
         this._fail = this.owner.getChildByName("Fail") as Laya.Image;
         this._complete.visible = false;
@@ -44,10 +48,21 @@ export default class InGameView extends ViewBase_csjc {
         this._tutorialBtn.on(Laya.Event.CLICK, this, this.OnTutorialBtn);
         this._moreGameBtn.on(Laya.Event.CLICK, this, this.OnMoreGameBtn);
         EventMgr_csjc.regEvent_csjc(EventDef_csjc.SelectHero, this, this.OnSelectHero);
+        EventMgr_csjc.regEvent_csjc(EventDef_csjc.BossVisible, this, this.onBossVisible);
+
 
     }
     removeEvent(){
         EventMgr_csjc.removeEvent_csjc(EventDef_csjc.SelectHero, this, this.OnSelectHero);
+        EventMgr_csjc.removeEvent_csjc(EventDef_csjc.BossVisible, this, this.onBossVisible);
+    }
+    /**
+     * 怪物出现
+     */
+    onBossVisible()
+    {
+        this._pros.visible =true
+        this._playerPros.visible =true
 
     }
     /**监听选择英雄 */
@@ -59,6 +74,7 @@ export default class InGameView extends ViewBase_csjc {
 
             this._prosSpeedOf.skin = "GamePlaying/boss_xuetiao_long.png";
             (this._prosSpeedOf.getChildAt(0) as Laya.Image).skin = "GamePlaying/touxiang_long.png";
+            this._selecetKind = 0
         }
         else{
             this._playerProsSpeedOf.skin = "GamePlaying/boss_xuetiao_long.png";
@@ -66,6 +82,7 @@ export default class InGameView extends ViewBase_csjc {
 
             this._prosSpeedOf.skin = "GamePlaying/boss_xuetiao_jingang.png";
             (this._prosSpeedOf.getChildAt(0) as Laya.Image).skin = "GamePlaying/touxiang_jingang.png";
+            this._selecetKind = 1
         }
 
 
@@ -93,7 +110,12 @@ export default class InGameView extends ViewBase_csjc {
     onShow() {
         super.onShow();
         // SceneMgr_cscj.Instance.StartGame();
+
         ViewMgr_csjc.instance_csjc.openView_csjc(ViewDef_csjc.SelectHero);
+
+        this._playerProsSpeedOf.width = 400;
+
+        this._prosSpeedOf.width = 400;
     }
 
     onCloseEvent = () => {
@@ -107,18 +129,24 @@ export default class InGameView extends ViewBase_csjc {
 
     onUpdate() {
         // console.log("boss-------------",SceneMgr_cscj.Instance.Boss)
-        if(SceneMgr_cscj.Instance.Boss)
+        // console.log("-+----------------------狂点",ViewMgr_csjc.instance_csjc.getView_csjc(ViewDef_csjc.KdBannerView))
+        // ViewMgr_csjc.instance_csjc.closeView_csjc(ViewDef_csjc.KdBannerView);
+
+        if( this._pros.visible ==true&&SceneMgr_cscj.Instance.Boss)
         {
+            // console.log("----------------跟随boss")
             let closeDis = -1;
             let cent = new Laya.Point(Laya.stage.width / 2, Laya.stage.height / 2);
             let pos = SceneMgr_cscj.Instance.BossSprite3D.transform.position.clone();
             pos.y += 2;
-            pos = Camera2UI.WorldToScreen2(SceneMgr_cscj.Instance.Camera, (SceneMgr_cscj.Instance.BossSprite3D.getChildAt(0) as Laya.Sprite3D).transform.position)
+            pos = Camera2UI.WorldToScreen2(SceneMgr_cscj.Instance.Camera, (SceneMgr_cscj.Instance.BossSprite3D.getChildAt(this._selecetKind) as Laya.Sprite3D).transform.position)
             this._pros.x = pos.x-300
             this._pros.y = pos.y-100
             this.onCheckPros()
         }
+
         if (this._gameOver || SceneMgr_cscj.Instance.GameOver == 0) return;
+
         this._gameOver = true;
         if (SceneMgr_cscj.Instance.GameOver == 1) {
             this._complete.visible = true;
@@ -139,8 +167,16 @@ export default class InGameView extends ViewBase_csjc {
     onCheckPros()
     {
         this._playerProsSpeedOf.width = 400* SceneMgr_cscj.Instance.Player.State.Hp/SceneMgr_cscj.Instance.Player.State.HpSum
-        // console.log("--------------------boss血量",SceneMgr_cscj.Instance.Boss.State.Hp)
         this._prosSpeedOf.width = 400* SceneMgr_cscj.Instance.Boss.State.Hp/SceneMgr_cscj.Instance.Boss.State.HpSum
+        // console.log("---------------------bosss血量",SceneMgr_cscj.Instance.Boss.State.Hp)
+        if(SceneMgr_cscj.Instance.Boss.State.Hp<=0)
+        {
+            SceneMgr_cscj.Instance.GameOver = 1
+        }
+        if(SceneMgr_cscj.Instance.Player.State.Hp<=0)
+        {
+            SceneMgr_cscj.Instance.GameOver = -1
+        }
 
     }
     GameOver(win: boolean) {

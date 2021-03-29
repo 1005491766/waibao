@@ -19,6 +19,12 @@ P 678BD3B2 haoyourewan.png
 P 3C50A1C9 jixu.png
 P 1B20B9E0 tuijian.png
 P 5A1EF91F zhengzai.png
+D Gameover
+P F5B2753F anniu_queding.png
+P C8DCAF3C jibai.png
+P C3E2C55B mubiao.png
+P 04B6C8DD shuzi_1.png
+P DE32A41F weijibai.png
 D GamePlaying
 P 204C7117 -lock.png
 P F7E1A8C4 biaoji.png
@@ -33,11 +39,15 @@ P 7C3A367E gengduoyouxi.png
 P 4BB136BB gongji.png
 P CB6F9240 huoyan.png
 P 2499143A jiaocheng.png
+P 52BCB0A8 jiqiren.png
 P FE620F86 lock.png
+P 58B1BC60 long1.png
 P BFFA8A0E next.png
+P 526368C7 qiang_1.png
+P 82438B86 qiang_2.png
 P D2BB0CC1 qiehuan.png
 P D6244400 renwuban.png
-R C58D92DA shibaitishi.png
+P C58D92DA shibaitishi.png
 P FE620F86 shiwu.png
 P 2BFD07D1 shuzi1.png
 P 03C7B5F7 shuzi2.png
@@ -57,21 +67,14 @@ P 7F6802C5 xingxing_gognji.png
 P 77B9679D xingxing_jineng.png
 P 0D599B55 yaogan.png
 P 2DDAC742 yaogananniu.png
-R 6592E3E9 游戏内-boss、胜利、霸王龙.jpg
-R C83D0697 游戏内-任务、失败、金刚.jpg
 D Kd
-P E65E6721 1.png
-P CD712806 anniu.png
-P 522B5887 baoxiang.png
-P CE6EF86F beijing.jpg
-P 2920C8EF click.png
-P 34FA61B6 img_jiesuan_1.png
-P 272A20F4 img_jiesuan_2.png
-P DB1679E0 jiantou.png
-R 946E4C2C jindu1.png
-R 285E6B2A jindu2.png
-P 8C98A5D2 kaibaoxiang.png
-P C4B5A86F kaiqijindu.png
+P 5456B173 anniu.png
+P BBEDDCF6 baoxiang.png
+P B1E684FC guang.png
+P 8E782B0A jiantou.png
+P D3FCEE12 jindu1.png
+P 924954B9 jindu2.png
+P 7A032EA5 kaibaoxiang.png
 D LoadingView
 D SelectHero
 P 35C88C6D fanhui.png
@@ -80,13 +83,10 @@ P B56412FB juesexuanze.png
 P 640BDC74 long.png
 P 655220EF tongyongbeijing.jpg
 D Youxijieshu
-P A40F7390 chenggong.png
 P 4BAC97D5 cuihuimubiao.png
 P 100EAE62 faguang.png
-R 272A20F4 img_jiesuan_2.png
 P 2F478790 jinbi.png
 P AA55EC7E mubiaodiban.png
-P E33660E6 queding.png
 P B3564A54 shibai.png
 P 95B74AD9 shuzi_bai.png
 D Zhujiemian

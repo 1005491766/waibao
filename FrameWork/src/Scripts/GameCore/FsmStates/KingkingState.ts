@@ -6,6 +6,8 @@ import SceneMgr_cscj from "../SceneMgr";
 import SoundMgr_csjc from "../../../Mgr/SoundMgr";
 import { CollisionGroup } from "../Enums";
 import MyAnimatorEvent from "../Character/MyAnimatorEvent";
+import PoolManager from "../GameTools/PoolManager";
+import StoneMgr from "../Character/StoneMgr";
 enum KingkongSubState {
     Idle,
     Move,
@@ -19,35 +21,46 @@ enum KingkongSubState {
     ClimbEnd,
     ThrowStone,
     Hited,
+    Die,
+
 }
 export default class KingkingState extends BaseState {
     constructor() {
         super();
         this.AddTransition(Transition.Kingkong2Trex, StateID.KingKong);
     }
-    get Hp(): number {return  this._hp}
+    get Hp(): number { return this._hp }
     private _subState: KingkongSubState = KingkongSubState.Idle;
     private _attackTimer: number = 0;
     protected stateID = StateID.KingKong;
     private _rigidBody3D: Laya.Rigidbody3D;
     private _onGround: boolean = true;
-    private _isClimb:boolean = false
-    private _climbMask:boolean = false
+    private _isClimb: boolean = false
+    private _climbMask: boolean = false
     private _faceWall: boolean;
+
+    private _atkStonePos: Laya.Sprite3D;
+    private _isThrow: boolean = false
 
     // private _attack1: Laya.PhysicsComponent;
     // private _attack2: Laya.PhysicsComponent;
     onAwake() {
-        console.log("-----------------------开始爬楼")
+        // console.log("-----------------------开始爬楼")
         this._animator = this.Model.getComponent(Laya.Animator) as Laya.Animator;
         // this._animator.avatar. = false
         this._rigidBody3D = this.owner.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
         this._rigidBody3D.angularFactor = new Laya.Vector3(0, 0, 0);
+        // this._rigidBody3D.ang = new Laya.Vector3(0, 0, 0);
+
         this._rigidBody3D.isKinematic = false
         this._rigidBody3D.collisionGroup = CollisionGroup.Character;
         this._rigidBody3D.canCollideWith = CollisionGroup.All ^ CollisionGroup.Character;
+        // console.log("-------------------------获取节点",this.owner,this.owner.getChildByName("AtkStone"))
+        this._atkStonePos = this.owner.getChildAt(0).getChildByName("AtkStone") as Laya.Sprite3D
         let ani = this.Model.addComponent(MyAnimatorEvent) as MyAnimatorEvent;
         this._isClimb = false
+        EventMgr_csjc.regEvent_csjc(EventDef_csjc.AttackInput,this,this.Hited);
+        EventMgr_csjc.regEvent_csjc(EventDef_csjc.EnemyDead,this,this.EatingEvent);
 
         ani.SetCharacter(this);
         this.SetAttack();
@@ -60,7 +73,6 @@ export default class KingkingState extends BaseState {
         // this._attack2 = this.Model.getChildByName("Attack2").getComponent(Laya.PhysicsComponent);
         // this._attack2.collisionGroup = CollisionGroup.Character
         // this._attack2.canCollideWith = CollisionGroup.All | CollisionGroup.Obstacle ^ CollisionGroup.Character;
-
         // this.Animator.play("Climbing Up Wall");
     }
 
@@ -68,17 +80,31 @@ export default class KingkingState extends BaseState {
         this.characterCtr.SetFollowObj(this.Sprite3D);
         this.Animator.play("Idle");
         EventMgr_csjc.dispatch_csjc(EventDef_csjc.TransformEvent, [false]);
-        EventMgr_csjc.regEvent_csjc(EventDef_csjc.AttackInput,this,this.Hited);
+        console.log("------------------------注册被攻击事件")
         //测试为30
-        this._hpSum = 30
+        this._hpSum = 10
         this._hp = this._hpSum
     }
 
-    public Hited(data){
-        if(data.name==this.owner.name)
-        return
+
+    EatingEvent()
+    {
+        this._subState = KingkongSubState.Eating;
+        SoundMgr_csjc.instance_csjc.playSound_csjc("Eating");
+    }
+
+
+    /**受击 */
+    public Hited(data) {
+        // console.log("-------------------名字",data,this.owner.name)
+        if (data.name == this.owner.name)
+            return
+        let dis = Laya.Vector3.distance(this.Sprite3D.transform.position, data.v3);
+        // console.log("-------------------攻击距离",dis)
+        if (dis > 8)
+            return
         if (this.CurrentAni != "Hit Left") {
-            this._rigidBody3D.linearVelocity = new Laya.Vector3(0,0,0);
+            this._rigidBody3D.linearVelocity = new Laya.Vector3(0, 0, 0);
             this._subState = KingkongSubState.Hited;
         }
     }
@@ -100,17 +126,24 @@ export default class KingkingState extends BaseState {
      * @memberOf RobotState
      */
     public Act(any?: any) {
-        // console.log("------------------------输出",any)
-        if(this.CurrentAni == "Jump"&&this.Animator.getCurrentAnimatorPlayState(0).normalizedTime <= 0.5)
-        return
+        // console.log("--------------------------------排除在外",this._subState,this.CurrentAni == "Death" ||
+        //  this._isThrow == true,(this.CurrentAni == "Jump") && this.Animator.getCurrentAnimatorPlayState(0).normalizedTime <= 0.6)
+
+        if (this.CurrentAni == "Death" || this._isThrow == true)
+        {
+            console.log("-*-------------------死亡了")
+            return;
+ 
+        }
+        // console.log("------------------------输出",this._rigidBody3D.isKinematic)
+        if ((this.CurrentAni == "Jump") && this.Animator.getCurrentAnimatorPlayState(0).normalizedTime <= 0.6)
+            return
 
         this._onGround = this.OnGroundCheck();
 
-        if(this._subState != KingkongSubState.ClimbEnd&&this._climbMask == false)
-        {
+        if (this._subState != KingkongSubState.ClimbEnd && this._climbMask == false)  {
             this.OnWallCheck()
-            if(this._isClimb)
-            {
+            if (this._isClimb)  {
                 this.ClimbMethod();
                 return
             }
@@ -118,6 +151,8 @@ export default class KingkingState extends BaseState {
         // this.OnWallCheck();
 
         this._onGround = this.OnGroundCheck();
+        // console.log("--------------------------------状态机",this._subState)
+
         super.Act(any);
         {
             switch (this._subState) {
@@ -150,6 +185,9 @@ export default class KingkingState extends BaseState {
                 case KingkongSubState.Hited:
                     this.HitedMethod();
                     break;
+                case KingkongSubState.Die:
+                    this.DieMethod();
+                    break;
             }
         }
     }
@@ -162,7 +200,7 @@ export default class KingkingState extends BaseState {
         this._attackTimer -= Laya.timer.delta;
         let angle = 0;
         let spd = 1;
-        EventMgr_csjc.dispatch_csjc(EventDef_csjc.AttackInput, { name:this.owner.name })
+        EventMgr_csjc.dispatch_csjc(EventDef_csjc.AttackInput, { name: this.owner.name, v3: this.Sprite3D.transform.position })
 
         if (this.RockerAxis != null) {
             angle = (Math.atan2(this.RockerAxis.x, this.RockerAxis.y) / 3.14 * 180) + 180;
@@ -173,20 +211,21 @@ export default class KingkingState extends BaseState {
         }
         else if (this.CurrentAni == "Attack Box" && this._attackTimer < 800 && this._attackTimer > 700) {
             this.TurnAndMove(angle, spd * 5);
+
         }
         if (this._attackTimer <= 200 && this.AttackInput) {
             if (this.CurrentAni == "Attack") {
                 this._attackTimer = 1400;
                 this.Animator.play("Attack Box");
                 this.CurrentAni = "Attack Box";
-                SoundMgr_csjc.instance_csjc.playSound_csjc("Attack Jaw");
+                SoundMgr_csjc.instance_csjc.playSound_csjc("Attack1");
 
             }
             else {
                 this._attackTimer = 1000;
                 this.Animator.play("Attack");
                 this.CurrentAni = "Attack";
-                SoundMgr_csjc.instance_csjc.playSound_csjc("Attack Jaw");
+                SoundMgr_csjc.instance_csjc.playSound_csjc("Attack1");
             }
         }
         else if (this._attackTimer <= 0) {
@@ -243,6 +282,9 @@ export default class KingkingState extends BaseState {
      * @memberOf CharacterCtr
      */
     IdleMethod() {
+        // console.log("-*--------------------普通")
+        // EventMgr_csjc.dispatch_csjc(EventDef_csjc.CharacterNormal);
+
         if (!this._onGround) {
             this._subState = KingkongSubState.Falling;
         }
@@ -290,9 +332,9 @@ export default class KingkingState extends BaseState {
             this._subState = KingkongSubState.Jumping;
         }
         else if (this.ThrowStoneInput) {
+
             this._subState = KingkongSubState.ThrowStone;
         }
-        
         else if (this.RockerAxis != null) {
             let angle = (Math.atan2(this.RockerAxis.x, this.RockerAxis.y) / 3.14 * 180) + 180;
             // let spd = Math.min(1, Math.max(0.7, this.RockerAxis.distance(0, 0)));
@@ -324,12 +366,11 @@ export default class KingkingState extends BaseState {
     /*
         机器角色转向移动 
     */
-   TurnAndMove(angle: number, spd: number) {
-       if(this._onGround==false)
-       {
-        this._subState = KingkongSubState.Falling;
-       }
-   this.TurnByCamera(angle);
+    TurnAndMove(angle: number, spd: number) {
+        if (this._onGround == false)  {
+            this._subState = KingkongSubState.Falling;
+        }
+        this.TurnByCamera(angle);
         this.MoveForward(spd);
         // if (this.TurnByCamera(angle)) {
         //     this.MoveForward(spd);
@@ -418,21 +459,19 @@ export default class KingkingState extends BaseState {
         return res;
     }
 
-    protected getForward()
-    {
+    protected getForward()  {
         this.Model.transform.getForward(this.forwardV3)
         return this.forwardV3
     }
 
-    protected tempV3:Laya.Vector3 = new Laya.Vector3()
+    protected tempV3: Laya.Vector3 = new Laya.Vector3()
     /**
      * 设置中心变量v3
      * @param x 
      * @param y 
      * @param z 
      */
-    setTempV3(x:number=0,y:number=0,z:number=0)
-    {
+    setTempV3(x: number = 0, y: number = 0, z: number = 0)  {
         this.tempV3.x = x;
         this.tempV3.y = y;
         this.tempV3.z = z;
@@ -440,43 +479,41 @@ export default class KingkingState extends BaseState {
     }
 
     OnWallCheck() {
-        let tempY = this.CurrentAni == "Climbing Up Wall"?15:5
-        this.LineRayCast(this.setTempV3(this.Sprite3D.transform.position.x,this.Sprite3D.transform.position.y+tempY,this.Sprite3D.transform.position.z)
-        ,this.getForward(),-3,true)
+        let tempY = this.CurrentAni == "Climbing Up Wall" ? 15 : 5
+        this.LineRayCast(this.setTempV3(this.Sprite3D.transform.position.x, this.Sprite3D.transform.position.y + tempY, this.Sprite3D.transform.position.z)
+            , this.getForward(), -3, true)
         let checkres = false
-        for (let i = 0; i < this.hitResults.length; i++)
-        {
+        for (let i = 0; i < this.hitResults.length; i++)  {
             let collider = this.hitResults[i].collider
             // console.log("---------------查看前方",collider)
-            if(collider.owner.parent.name=="Buildings")
-            {
+            if (collider.owner.parent.name == "Buildings")  {
                 this._subState = KingkongSubState.Climb;
                 this._isClimb = true
+                EventMgr_csjc.dispatch_csjc(EventDef_csjc.CharacterClimbing);
+
                 checkres = true
             }
         }
-        if (this.CurrentAni == "Climbing Up Wall"&&checkres ==false)
-        {
+        if (this.CurrentAni == "Climbing Up Wall" && checkres == false)  {
             this._subState = KingkongSubState.ClimbEnd;
             this._isClimb = false
         }
 
     }
     TextLine
-
-    protected LineRayCast(m_origin: Laya.Vector3, driect: Laya.Vector3, distance: number,isTest=false)//: Array<Laya.HitResult>  {
+    protected LineRayCast(m_origin: Laya.Vector3, driect: Laya.Vector3, distance: number, isTest = false)//: Array<Laya.HitResult>  {
     {
-        if(isTest==true)
-        {
-            if(this.TextLine)
-            {
-                this.TextLine.destroy();
-            }
-            var lineDir = new Laya.Vector3(driect.x*distance,driect.y*distance,driect.z*distance)
-            var lineSprite:Laya.PixelLineSprite3D = SceneMgr_cscj.Instance.CurrentScene.addChild(new Laya.PixelLineSprite3D(1)) as Laya.PixelLineSprite3D;
-            lineSprite.addLine(m_origin, new Laya.Vector3(m_origin.x+lineDir.x,m_origin.y+lineDir.y,m_origin.z+lineDir.z), Laya.Color.RED, Laya.Color.RED);
-            this.TextLine = lineSprite
-        }
+        // if(isTest==true)
+        // {
+        //     if(this.TextLine)
+        //     {
+        //         this.TextLine.destroy();
+        //     }
+        //     var lineDir = new Laya.Vector3(driect.x*distance,driect.y*distance,driect.z*distance)
+        //     var lineSprite:Laya.PixelLineSprite3D = SceneMgr_cscj.Instance.CurrentScene.addChild(new Laya.PixelLineSprite3D(1)) as Laya.PixelLineSprite3D;
+        //     lineSprite.addLine(m_origin, new Laya.Vector3(m_origin.x+lineDir.x,m_origin.y+lineDir.y,m_origin.z+lineDir.z), Laya.Color.RED, Laya.Color.RED);
+        //     this.TextLine = lineSprite
+        // }
         this.ray.origin = m_origin//= new Laya.Ray(origin, driect);
         this.ray.direction = driect
         SceneMgr_cscj.Instance.CurrentScene.physicsSimulation.rayCastAll(this.ray, this.hitResults, distance);
@@ -488,8 +525,6 @@ export default class KingkingState extends BaseState {
             this._subState = KingkongSubState.Eating;
             SoundMgr_csjc.instance_csjc.playSound_csjc("Eating");
         }
-        // console.log("----------------我是恐龙攻击我",enemy.name)
-
     }
 
     EatingMethod() {
@@ -506,45 +541,96 @@ export default class KingkingState extends BaseState {
             this._subState = KingkongSubState.Idle;
         }
     }
+    DieMethod()  {
+        if (this.CurrentAni != "Death") {
+            this.CurrentAni = "Death";
+            this.Animator.speed = 1;
+            this.Animator.play("Death");
+            this._rigidBody3D.linearVelocity = new Laya.Vector3(0, 0, 0);
+
+            // Laya.timer.once(this.Animator.getCurrentAnimatorPlayState(0).duration*1000,this,()=>{
+            //     EventMgr_csjc.dispatch_csjc(EventDef_csjc.CharacterNormal);
+            //     this._subState = KingkongSubState.Idle;
+            //     this._isHited = false;
+            // })
+        }
+    }
 
     /**受击 */
-    HitedMethod(){
-            if (this.CurrentAni != "Hit Left") {
-                this.CurrentAni = "Hit Left";
-                this.Animator.speed = 1;
-                this.Animator.play("Hit Left");
-                this._hp-=1;
+    HitedMethod() {
+        // if (this.CurrentAni != "Hit Left") {
+        //     this.CurrentAni = "Hit Left";
+        //     this.Animator.speed = 1;
+        //     this.Animator.play("Hit Left");
+        //     this._hp=this._hp>0?this._hp-1:1;
+        // }
+        // else if ((this.CurrentAni == "Hit Left" )&& this.Animator.getCurrentAnimatorPlayState(0).normalizedTime >= 1) {
+        //     EventMgr_csjc.dispatch_csjc(EventDef_csjc.CharacterNormal);
+        //     this._subState = KingkongSubState.Idle;
+        //     this._rigidBody3D.linearVelocity = new Laya.Vector3(0, 0, 0);
+        // }
+        if (this.CurrentAni != "Hit Left") {
+            this.CurrentAni = "Hit Left";
+            this.Animator.speed = 1;
+            this.Animator.play("Hit Left");
+            this._hp = this._hp > 0 ? this._hp - 1 : 1;
+            if (this._hp <= 0)  {
+                SceneMgr_cscj.Instance.BossVisible = false
+                this.Animator.play("Death");
+                this.CurrentAni = "Death";
+                this._subState = KingkongSubState.Die;
+                return
             }
-            else if ((this.CurrentAni == "Hit Left" )&& this.Animator.getCurrentAnimatorPlayState(0).normalizedTime >= 1) {
+            console.log("------------------------s受击")
+            this._isHited = true;
+            // console.log("----------------扣血",this._hp);
+            Laya.timer.once(this.Animator.getCurrentAnimatorPlayState(0).duration * 500, this, () => {
                 EventMgr_csjc.dispatch_csjc(EventDef_csjc.CharacterNormal);
                 this._subState = KingkongSubState.Idle;
                 this._rigidBody3D.linearVelocity = new Laya.Vector3(0, 0, 0);
-            }
+                this._isHited = false;
+            })
+        }
     }
     /**丢石头 */
-    ThrowStoneMethod(){
+    ThrowStoneMethod() {
         if (this.CurrentAni != "ThrowStone") {
+            this._isThrow = true
+            this._rigidBody3D.linearVelocity = Laya.Vector3._ZERO
             this.CurrentAni = "ThrowStone";
             this.Animator.speed = 1;
             this.Animator.play("ThrowStone");
-            Laya.timer.once(this.Animator.getCurrentAnimatorPlayState(0).duration*600,this,()=>{
-                this._rigidBody3D.linearVelocity = new Laya.Vector3(0, 5, 0);
-                Laya.timer.once(this.Animator.getCurrentAnimatorPlayState(0).duration*200,this,()=>{
-                })
-            })
-            Laya.timer.once(this.Animator.getCurrentAnimatorPlayState(0).duration*1000,this,()=>{
-                Laya.timer.once(300,this,()=>{
+            // let efcol :Laya.Sprite3D = PoolManager.getInstance().DequeueItem(0)as Laya.MeshSprite3D;
+            // efcol.active = true
+            // this._atkStonePos.addChild(efcol)
+            // efcol.transform.localPosition = Laya.Vector3._ZERO
+            console.log("----------------当前动画播放",this.Animator.getCurrentAnimatorPlayState(0).duration)
+            Laya.timer.once(4.9*200, this, () => {
+                // this._atkStonePos.removeChild(efcol)
+                // SceneMgr_cscj.Instance.CurrentScene.addChild(efcol);
+                let efcol: Laya.Sprite3D = PoolManager.getInstance().DequeueItem(0) as Laya.MeshSprite3D;
+                SceneMgr_cscj.Instance.CurrentScene.addChild(efcol);
+                efcol.active = true
+                efcol.transform.position = this._atkStonePos.transform.position.clone()
+                efcol.transform.rotationEuler = this.Model.transform.rotationEuler.clone()
 
+                if (efcol.getComponent(StoneMgr) == null)  {
+                    efcol.addComponent(StoneMgr)
+                }
+                efcol.getComponent(StoneMgr).Init(efcol.transform.rotationEuler.y)
+                Laya.timer.once(4.9*200, this, () => {
+                    this._isThrow = false
                 })
+
             })
         }
         else if (this.CurrentAni == "ThrowStone" && this.Animator.getCurrentAnimatorPlayState(0).normalizedTime >= 1) {
             EventMgr_csjc.dispatch_csjc(EventDef_csjc.CharacterNormal);
             this._subState = KingkongSubState.Idle;
             this._rigidBody3D.linearVelocity = new Laya.Vector3(0, 0, 0);
-
         }
     }
+
 
     /**
      * 攀爬结束
@@ -556,19 +642,18 @@ export default class KingkingState extends BaseState {
             this.Animator.speed = 1;
             console.log("---------------开始攀爬")
             this.Animator.play("ClimbingOver");
-            Laya.timer.once(this.Animator.getCurrentAnimatorPlayState(0).duration*600,this,()=>{
+            Laya.timer.once(this.Animator.getCurrentAnimatorPlayState(0).duration * 600, this, () => {
                 this._rigidBody3D.linearVelocity = new Laya.Vector3(0, 5, 0);
-                Laya.timer.once(this.Animator.getCurrentAnimatorPlayState(0).duration*200,this,()=>{
-                    let localy = this.Sprite3D.transform.localPositionY+10
-                    Laya.Tween.to(this.Sprite3D.transform,{localPositionY:localy},300)
+                Laya.timer.once(this.Animator.getCurrentAnimatorPlayState(0).duration * 200, this, () => {
+                    let localy = this.Sprite3D.transform.localPositionY + 10
+                    Laya.Tween.to(this.Sprite3D.transform, { localPositionY: localy }, 300)
                     // this._rigidBody3D.linearVelocity = new Laya.Vector3(0, 20, 0);
                 })
             })
-            Laya.timer.once(this.Animator.getCurrentAnimatorPlayState(0).duration*1000,this,()=>{
+            Laya.timer.once(this.Animator.getCurrentAnimatorPlayState(0).duration * 1000, this, () => {
                 this.MoveForward(1.5);
-                Laya.timer.once(300,this,()=>{
+                Laya.timer.once(300, this, () => {
                     this._rigidBody3D.linearVelocity = new Laya.Vector3(0, 0, 0);
-
                 })
             })
         }
@@ -576,14 +661,13 @@ export default class KingkingState extends BaseState {
             EventMgr_csjc.dispatch_csjc(EventDef_csjc.CharacterNormal);
             this._subState = KingkongSubState.Idle;
             // this._rigidBody3D.isKinematic = true
-            this._rigidBody3D.gravity = this.setTempV3(0,-10,0)
+            this._rigidBody3D.gravity = this.setTempV3(0, -10, 0)
             this._rigidBody3D.linearVelocity = new Laya.Vector3(0, 0, 0);
 
         }
     }
 
-    ClimbMask()
-    {
+    ClimbMask()  {
         this._climbMask = false
     }
 
@@ -591,16 +675,17 @@ export default class KingkingState extends BaseState {
      * 攀爬函数
      */
     ClimbMethod() {
+
         if (this._onGround) {
             this._subState = KingkongSubState.Falling;
         }
         else if (this.JumpInput) {
-            console.log("---------------------输入条约")
+            // console.log("---------------------输入条约")
             this._isClimb = false
             this._climbMask = true
-            Laya.timer.clear(this,this.ClimbMask)
-            Laya.timer.frameOnce(120,this,this.ClimbMask)
-            this._rigidBody3D.gravity = this.setTempV3(0,-10,0)
+            Laya.timer.clear(this, this.ClimbMask)
+            Laya.timer.frameOnce(500, this, this.ClimbMask)
+            this._rigidBody3D.gravity = this.setTempV3(0, -10, 0)
             this._subState = KingkongSubState.Jumping;
 
             return
@@ -611,27 +696,29 @@ export default class KingkingState extends BaseState {
             this.Animator.speed = 1;
             this.Animator.play("Climbing Up Wall");
         }
-        this._rigidBody3D.gravity = this.setTempV3(0,0,0)
+        this._rigidBody3D.gravity = this.setTempV3(0, 0, 0)
 
         if (this.RockerAxis != null) {
-            let isup = this.RockerAxis.y>=0?1:-1
+            let isup = this.RockerAxis.y >= 0 ? 1 : -1
 
             let spd = Math.min(1, Math.max(0.7, this.RockerAxis.distance(0, 0)));
 
-            this.Animator.speed = this.RockerAxis==null?0: isup*spd*-1;
+            this.Animator.speed = this.RockerAxis == null ? 0 : isup * spd * -1;
 
             // let curAngle = this.Model.transform.localRotationEulerY * 3.14 / 180;
             // console.log("----------------------爬上爬下",this.RockerAxis.y,spd)
-            this._rigidBody3D.linearVelocity = new Laya.Vector3(0,isup*spd*-3,0);
+            this._rigidBody3D.linearVelocity = new Laya.Vector3(0, isup * spd * -3, 0);
         }
-        else
-        {
-            this._rigidBody3D.linearVelocity = new Laya.Vector3(0,0,0);
+        else  {
+            this._rigidBody3D.linearVelocity = new Laya.Vector3(0, 0, 0);
             this.Animator.speed = 0
         }
     }
 
     onDestroy() {
         this.characterCtr.StopSound();
+        EventMgr_csjc.removeEvent_csjc(EventDef_csjc.AttackInput, this, this.Hited);
+        EventMgr_csjc.removeEvent_csjc(EventDef_csjc.EnemyDead,this,this.EatingEvent);
+
     }
 }

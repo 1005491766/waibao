@@ -24,8 +24,13 @@ export default class KdBannerView extends ViewBase_csjc {
         this._progressBar_csjc.width = 0;
         this._clickBtn_csjc = this.owner.getChildByName("ClickBtn") as Laya.Button;
     }
+    onShow(){
+        super.onShow()
+        console.log("----------------进入狂点")
+    }
 
     onUpdate() {
+        // console.log("-*----------------------狂点内部")
         if (this._needShowAni) {
             this._countTimer += Laya.timer.delta / 1000;
             let angle = this._countTimer * 3.14 / 180 * 720;
@@ -91,6 +96,7 @@ export default class KdBannerView extends ViewBase_csjc {
     }
 
     onCloseEvent = () => {
+        console.log("----------------狂点结束")
         ViewMgr_csjc.instance_csjc.openView_csjc(ViewDef_csjc.InGameView);
         CachedWXBannerAd_csjc.hide_csjc();
     }

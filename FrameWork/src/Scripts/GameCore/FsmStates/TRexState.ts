@@ -15,7 +15,8 @@ enum TRexSubState {
     Jumping,
     Falling,
     Eating,
-    Hited
+    Hited,
+    Die
 
 }
 export default class TRexState extends BaseState {
@@ -38,8 +39,8 @@ export default class TRexState extends BaseState {
         this._rigidBody3D = this.owner.getComponent(Laya.Rigidbody3D) as Laya.Rigidbody3D;
         this._rigidBody3D.angularFactor = new Laya.Vector3(0, 0, 0);
         this._rigidBody3D.collisionGroup = CollisionGroup.Character;
-        this._rigidBody3D.canCollideWith = CollisionGroup.All ^ CollisionGroup.Character;
-        this._rigidBody3D.isKinematic =false
+        this._rigidBody3D.canCollideWith = CollisionGroup.All ;
+        this._rigidBody3D.isKinematic = false
         // if (this._rigidBody3D.colliderShape != null) {
         //     this._rigidBody3D.colliderShape.destroy();
         // }
@@ -62,6 +63,7 @@ export default class TRexState extends BaseState {
         this._attack1 = this.Model.getChildByName("Attack1_TRex").getComponent(Laya.PhysicsComponent);
         this._attack1.collisionGroup = CollisionGroup.Character
         this._attack1.canCollideWith = CollisionGroup.All | CollisionGroup.Obstacle ^ CollisionGroup.Character;
+        // this._attack1.
         this._attack2 = this.Model.getChildByName("Attack2_TRex").getComponent(Laya.PhysicsComponent);
         this._attack2.collisionGroup = CollisionGroup.Character
         this._attack2.canCollideWith = CollisionGroup.All | CollisionGroup.Obstacle ^ CollisionGroup.Character;
@@ -77,17 +79,38 @@ export default class TRexState extends BaseState {
         this.Animator.play("End Sleeping");
         EventMgr_csjc.dispatch_csjc(EventDef_csjc.TransformEvent, [false]);
         EventMgr_csjc.regEvent_csjc(EventDef_csjc.AttackInput,this,this.Hited);
-        //初步测试用30
-        this._hpSum = 30
-        this._hp = this._hpSum
+        EventMgr_csjc.regEvent_csjc(EventDef_csjc.EnemyDead,this,this.EatingEvent);
 
+        //初步测试用30
+        this._hpSum = 10
+        this._hp = this._hpSum
         // EventMgr_csjc.dispatch_csjc(EventDef_csjc.Camera_Event_csjc, { CameraOffset: new Laya.Vector3(0, 20, 10), CameraViewForward: 0 });
+    }
+
+    
+    onDisable()
+    {
+        EventMgr_csjc.removeEvent_csjc(EventDef_csjc.AttackInput,this,this.Hited);
+        EventMgr_csjc.removeEvent_csjc(EventDef_csjc.EnemyDead,this,this.EatingEvent);
+
+    }
+
+    EatingEvent()
+    {
+        this._subState = TRexSubState.Eating;
+        SoundMgr_csjc.instance_csjc.playSound_csjc("Eating");
     }
 
     /**受击 */
     public Hited(data){
+
         if(data.name==this.owner.name)
         return
+        let dis = Laya.Vector3.distance(this.Sprite3D.transform.position, data.v3);
+        if(dis>8)
+        return
+        // console.log("-------------------恐龙攻击",dis)
+
         if (this.CurrentAni != "End Sleeping") {
             this._rigidBody3D.linearVelocity = new Laya.Vector3(0,0,0);
             this._subState = TRexSubState.Hited;
@@ -106,6 +129,8 @@ export default class TRexState extends BaseState {
      * @memberOf RobotState
      */
     public Act(any?: any) {
+        if(this.CurrentAni == "Start Sliping")
+        return ;
         this._onGround = this.OnGroundCheck();
         super.Act(any);
         // if (this._climbOver >= 0) {
@@ -140,8 +165,12 @@ export default class TRexState extends BaseState {
                     break;
                 case TRexSubState.Eating:
                     this.EatingMethod();
+                    break;
                 case TRexSubState.Hited:
                     this.HitedMethod();
+                    break;
+                case TRexSubState.Die:
+                    this.DieMethod();
                     break;
             }
         }
@@ -153,7 +182,7 @@ export default class TRexState extends BaseState {
         this._attackTimer -= Laya.timer.delta;
         let angle = 0;
         let spd = 1;
-        EventMgr_csjc.dispatch_csjc(EventDef_csjc.AttackInput, { name:this.owner.name })
+        EventMgr_csjc.dispatch_csjc(EventDef_csjc.AttackInput, { name:this.owner.name,v3:this.Sprite3D.transform.position })
         if (this.RockerAxis != null) {
             angle = (Math.atan2(this.RockerAxis.x, this.RockerAxis.y) / 3.14 * 180) + 180;
             spd = Math.min(1, Math.max(0.7, this.RockerAxis.distance(0, 0)));
@@ -468,6 +497,7 @@ export default class TRexState extends BaseState {
     private _fireTimer: number = 0;
     SpitFireMethod() {
         if (this.FireInput) {
+            EventMgr_csjc.dispatch_csjc(EventDef_csjc.AttackInput, { name:this.owner.name,v3:this._fire .transform.position})
             this._fireTimer = 300;
             this.StopMove();
             this.characterCtr.FireSound(1);
@@ -520,32 +550,59 @@ export default class TRexState extends BaseState {
     }
 
     onCollisionEnter(collision: Laya.Collision) {
-        let enemy = collision.other.owner as Laya.Sprite3D;
-        if (enemy.name.search("Enemy") > -1) {
-            this._subState = TRexSubState.Eating;
-            SoundMgr_csjc.instance_csjc.playSound_csjc("Eating");
-        }
+        // let enemy = collision.other.owner as Laya.Sprite3D;
+        // if (enemy.name.search("Enemy") > -1) {
+        //     this._subState = TRexSubState.Eating;
+        //     SoundMgr_csjc.instance_csjc.playSound_csjc("Eating");
+        // }
 
         // console.log("----------------我是恐龙攻击我",enemy.name)
         // if()
     }
 
-
+    DieMethod()
+    {
+        if (this.CurrentAni != "Start Sliping") {
+            this.CurrentAni = "Start Sliping";
+            this.Animator.speed = 1;
+            this.Animator.play("Start Sliping");
+            this._rigidBody3D.linearVelocity = new Laya.Vector3(0, 0, 0);
+        }
+    }
     
     /**受击 */
     HitedMethod(){
         if (this.CurrentAni != "End Sleeping") {
             this.CurrentAni = "End Sleeping";
-            this.Animator.speed = 3;
+            this.Animator.speed = 1;
             this.Animator.play("End Sleeping");
-            this._hp-=1;
-            console.log("----------------扣血",this._hp)
+            // console.log("---------------------发送攻击事件")
+
+            this._hp=this._hp>0?this._hp-1:1;
+            console.log("-----------------------hp",this._hp)
+            if(this._hp<=0)
+            {
+                console.log("---------------------死亡")
+                SceneMgr_cscj.Instance.BossVisible = false
+                this.Animator.play("Start Sliping");
+                this.CurrentAni = "Start Sliping";
+                this._subState = TRexSubState.Die;
+                return
+            }
+            this._isHited = true;
+            // console.log("----------------扣血",this._hp);
+            Laya.timer.once(this.Animator.getCurrentAnimatorPlayState(0).duration*500,this,()=>{
+                EventMgr_csjc.dispatch_csjc(EventDef_csjc.CharacterNormal);
+                this._subState = TRexSubState.Idle;
+                this._rigidBody3D.linearVelocity = new Laya.Vector3(0, 0, 0);
+                this._isHited = false;
+            })
         }
-        else if ((this.CurrentAni == "End Sleeping" )&& this.Animator.getCurrentAnimatorPlayState(0).normalizedTime >= 1) {
-            EventMgr_csjc.dispatch_csjc(EventDef_csjc.CharacterNormal);
-            this._subState = TRexSubState.Idle;
-            this._rigidBody3D.linearVelocity = new Laya.Vector3(0, 0, 0);
-        }
+        // else if ((this.CurrentAni == "End Sleeping" )&& this.Animator.getCurrentAnimatorPlayState(0).normalizedTime >= 1) {
+        //     EventMgr_csjc.dispatch_csjc(EventDef_csjc.CharacterNormal);
+        //     this._subState = TRexSubState.Idle;
+        //     this._rigidBody3D.linearVelocity = new Laya.Vector3(0, 0, 0);
+        // }
 }
 
     /**进食 */
@@ -566,5 +623,6 @@ export default class TRexState extends BaseState {
 
     onDestroy() {
         this.characterCtr.StopSound();
+
     }
 }

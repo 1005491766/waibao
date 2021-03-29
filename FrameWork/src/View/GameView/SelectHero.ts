@@ -3,6 +3,7 @@ import SceneMgr_cscj from "../../Scripts/GameCore/SceneMgr";
 import { PlayerType } from "../../Scripts/GameCore/Enums";
 import EventMgr_csjc from "../../Event/EventMgr";
 import { EventDef_csjc } from "../../Event/EventDef";
+import ViewMgr_csjc, { ViewDef_csjc } from "../../Mgr/ViewMgr";
 
 export default class SelectHero extends ViewBase_csjc {
 
@@ -23,7 +24,7 @@ export default class SelectHero extends ViewBase_csjc {
         this._heroSlt_1.on(Laya.Event.CLICK, this,this.clickTRex);
         this._startBtn.on(Laya.Event.CLICK, this,this.onPlayGame);
 
-        this.clickKingKong()
+        // this.clickKingKong()
     }
     removeEvent()
     {
@@ -38,21 +39,28 @@ export default class SelectHero extends ViewBase_csjc {
         SceneMgr_cscj.Instance.PlayerKind = PlayerType.Kingkong
         SceneMgr_cscj.Instance.BossKind = PlayerType.TRex
         this._select.x = this._heroSlt_0.x
-        
+        this.onPlayGame()
     }
 
     clickTRex()
     {
         SceneMgr_cscj.Instance.PlayerKind = PlayerType.TRex
         SceneMgr_cscj.Instance.BossKind = PlayerType.Kingkong
-
         this._select.x = this._heroSlt_1.x
+        this.onPlayGame()
+
     }
     onPlayGame()
     {
         SceneMgr_cscj.Instance.StartGame();
         this.closeView();
+        // Laya.timer.frameOnce(5,this,()=>{
+        //     ViewMgr_csjc.instance_csjc.closeView_csjc(ViewDef_csjc.KdBannerView);
+        // })
+        // ViewMgr_csjc.instance_csjc.closeView_csjc(ViewDef_csjc.KdBannerView);
+
         EventMgr_csjc.dispatch_csjc(EventDef_csjc.SelectHero);
+        
     }
 
 

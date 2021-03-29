@@ -254,6 +254,9 @@ export default class BtnPanel extends Laya.Script {
         if (!this._RTransBtn.gray) this._RTransBtn.gray = true;
         if (!this._jumpBtn.gray) this._jumpBtn.gray = true;
         if (!this._fireBtn.gray) this._fireBtn.gray = true;
+        
+        if (!this._kingKongAtkBtn.gray) this._kingKongAtkBtn.gray = true;
+        if (!this._kingKongFireBtnBtn.gray) this._kingKongFireBtnBtn.gray = true;
     }
 
     Climbing() {
@@ -261,6 +264,10 @@ export default class BtnPanel extends Laya.Script {
         if (!this._RTransBtn.gray) this._RTransBtn.gray = true;
         if (!this._fireBtn.gray) this._fireBtn.gray = true;
         if (this._jumpBtn.gray) this._jumpBtn.gray = false;
+
+        if (!this._kingKongAtkBtn.gray) this._kingKongAtkBtn.gray = true;
+        if (!this._kingKongFireBtnBtn.gray) this._kingKongFireBtnBtn.gray = true;
+
     }
 
     Normal() {
@@ -268,5 +275,9 @@ export default class BtnPanel extends Laya.Script {
         if (this._RTransBtn.gray) this._RTransBtn.gray = false;
         if (this._jumpBtn.gray) this._jumpBtn.gray = false;
         if (this._fireBtn.gray) this._fireBtn.gray = false;
+
+        if (this._kingKongAtkBtn.gray) this._kingKongAtkBtn.gray = false;
+        if (this._kingKongFireBtnBtn.gray) this._kingKongFireBtnBtn.gray = false;
+
     }
 }

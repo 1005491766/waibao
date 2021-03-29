@@ -5,10 +5,6 @@ const useIDENode = process.argv[0].indexOf("LayaAir") > -1 ? true : false;
 let ideModuleDir = useIDENode ? process.argv[1].replace("gulp\\bin\\gulp.js", "").replace("gulp/bin/gulp.js", "") : "";
 let workSpaceDir = useIDENode ? process.argv[2].replace("--gulpfile=", "").replace("\\.laya\\publish.js", "").replace("/.laya/publish.js", "") + "/" : "./../";
 
-//混淆的相关参数，需要手动填写
-global.autoChangeName = false;//是否开启自动改名?
-global.confusion = false;//是否开启混淆?
-
 //引用插件模块
 const gulp = require(ideModuleDir + "gulp");
 const fs = require("fs");
@@ -21,11 +17,6 @@ const revdel = require(ideModuleDir + "gulp-rev-delete-original");
 const revCollector = require(ideModuleDir + 'gulp-rev-collector');
 const del = require(ideModuleDir + "del");
 const requireDir = require(ideModuleDir + 'require-dir');
-const javascriptObfuscator = require(ideModuleDir + 'gulp-javascript-obfuscator');
-const shell = require(ideModuleDir + "gulp-shell");
-let browserify = require(ideModuleDir + "browserify");
-let source = require(ideModuleDir + "vinyl-source-stream");
-let tsify = require(ideModuleDir + "tsify");
 
 global.ideModuleDir = ideModuleDir;
 global.workSpaceDir = workSpaceDir;
@@ -91,48 +82,15 @@ gulp.task("loadConfig", function () {
 	}
 });
 
-//只混淆bundle.js
-let pycmd = 'python ' + workSpaceDir + "/uglyts.py" + " " + workSpaceDir;
-if(global.autoChangeName){
-	gulp.task("uglyts", ["compile"],shell.task(pycmd));
-}
-else{
-	gulp.task("uglyts", ["compile"],function(cb){
-		console.log("!!!!!!!!!!不用自动改名!!!!!!!!!!");
- 		cb();
-	});
-}
-
-//bundle.js混淆放在发布，否则影响调试
-gulp.task("obfus",["uglyts"],function (cb) {
-	if(!global.confusion) {
-		cb();
-		return;
-	}
-	return	gulp.src(workSpaceDir + "/bin/js/bundle.js")
-		// .pipe(javascriptObfuscator(
-		// 	{
-		// 		seed : Date.now(),
-		// 		reservedNames : ["Main"],
-		// 		deadCodeInjection : false,
-		// 		identifierNamesGenerator : "mangled",
-		// 		deadCodeInjectionThreshold : 0.2,
-		// 		stringArray : false,
-		// 		stringArrayEncoding : "rc4",
-		// 		stringArrayThreshold : 0.2
-		// 	}))
-		.pipe(javascriptObfuscator(
-			{
-				seed : Date.now(),
-				reservedNames : ["Main"],
-				stringArrayEncoding : "rc4",
-				deadCodeInjection : false,
-			}))
-		.pipe(gulp.dest(workSpaceDir + "/bin/js"));
-})
+// 重新编译项目
+// gulp.task("compile", ["loadConfig"], function () {
+// 	if (config.compile) {
+// 		console.log("compile");
+// 	}
+// });
 
 // 清理release文件夹
-gulp.task("clearReleaseDir", ["obfus"], function (cb) {
+gulp.task("clearReleaseDir", ["compile"], function (cb) {
 	if (config.clearReleaseDir) {
 		let delList = [releaseDir, releaseDir + "_pack", config.packfileTargetValue];
 		// 小米快游戏，使用即存的项目，删掉Laya工程文件，保留小米环境项目文件

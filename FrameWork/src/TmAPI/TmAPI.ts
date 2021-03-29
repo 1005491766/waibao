@@ -1,6 +1,7 @@
 import EventMgr_csjc from "../Event/EventMgr";
 import ALD_csjc from "../ALD"
 import TmAppConfig from "./TmAppConfig";
+import GameSettings_csjc from "../GameSettings";
 /**
  * 天幕sdk系统API
  * 
@@ -9,11 +10,10 @@ import TmAppConfig from "./TmAppConfig";
  */
 export default class TmAPI {
 
-    //AppId
-    public static AppId = "";
+    public static UseSDK: boolean = false;
 
     //当前App版本
-    public static AppVersion = "1.0.0";
+    public static AppVersion = GameSettings_csjc.Versions_csjc;
 
     //轮播广告位
     public static ListIcoAdLocationId = 1075799;
@@ -23,7 +23,6 @@ export default class TmAPI {
 
     //Banner广告位
     public static BannerAdLocationId = 1076001;
-
 
     public static _iphoneIgnoreAppIds =
         [
@@ -39,7 +38,7 @@ export default class TmAPI {
      * @memberof TmAPI
      */
     public static Init() {
-        if (Laya.Browser.onMiniGame) {
+        if (Laya.Browser.onMiniGame && this.UseSDK) {
             Laya.Browser.window["wx"].tmSDK.init({
                 hideRequestLog: true,
                 appVersion: this.AppVersion
@@ -55,7 +54,7 @@ export default class TmAPI {
      * @memberof TmAPI
      */
     public static Login(func: Function) {
-        if (Laya.Browser.onMiniGame) {
+        if (Laya.Browser.onMiniGame && this.UseSDK) {
             Laya.Browser.window["wx"].tmSDK.login().then(res => {
                 console.log("登陆成功", res)
                 if (func != null) {
@@ -66,7 +65,7 @@ export default class TmAPI {
     }
 
     public static NoLoginInit(openId) {
-        if (Laya.Browser.onMiniGame) {
+        if (Laya.Browser.onMiniGame && this.UseSDK) {
             console.log(openId);
             Laya.Browser.window["wx"].tmSDK.sendUserInfo({ openId: openId, gender: 1 });
             console.log("传入天幕OpenId: ", openId);
@@ -86,7 +85,7 @@ export default class TmAPI {
             completeHandler({ IsOpen: false });
             return;
         }
-        if (Laya.Browser.onMiniGame) {
+        if (Laya.Browser.onMiniGame && this.UseSDK) {
             Laya.Browser.window["wx"].tmSDK.checkFlowIsOpen({
                 positionId: positionId
             }).then((res) => {
@@ -153,7 +152,7 @@ export default class TmAPI {
      * @memberof TmAPI
      */
     private static GetAdvs(positionId: number, completeHandler: Function) {
-        if (Laya.Browser.onMiniGame) {
+        if (Laya.Browser.onMiniGame && this.UseSDK) {
             Laya.Browser.window["wx"].tmSDK.getFlowConfig({
                 positionId: positionId
             }).then((config) => {
@@ -174,7 +173,7 @@ export default class TmAPI {
      * @memberof TmAPI
      */
     public static NavigateAndReport(positionId, creativeId, appid, completeFunc?: Function) {
-        if (Laya.Browser.onMiniGame) {
+        if (Laya.Browser.onMiniGame && this.UseSDK) {
             this.FlowNavigate(positionId, creativeId, (flag, res) => {
                 console.log(flag, res)
                 if (flag) {
@@ -204,7 +203,7 @@ export default class TmAPI {
      * @memberof TmAPI
      */
     public static FlowNavigate(positionId, creativeId, completeFunc?: Function) {
-        if (Laya.Browser.onMiniGame) {
+        if (Laya.Browser.onMiniGame && this.UseSDK) {
             Laya.Browser.window["wx"].tmSDK.flowNavigate({
                 positionId: positionId, // 广告位id, 请先使用该id获取推广创意列表
                 creativeId: creativeId,  // 传入获取到的creativeId
@@ -241,7 +240,7 @@ export default class TmAPI {
      * @memberof TmAPI
      */
     public static getAppJSONConfig(key: string, completeFunc: Function) {
-        if (Laya.Browser.onMiniGame) {
+        if (Laya.Browser.onMiniGame && this.UseSDK) {
             Laya.Browser.window["wx"].tmSDK.getAppJSONConfig(key).then((res) => {
                 if (completeFunc) {
                     completeFunc(res);
@@ -265,7 +264,7 @@ export default class TmAPI {
      * @memberof TmAPI
      */
     public static SendEvent(eventId: string, res?: any) {
-        if (Laya.Browser.onMiniGame) {
+        if (Laya.Browser.onMiniGame && this.UseSDK) {
             console.log("发送事件:", eventId, "参数:", res);
             Laya.Browser.window["wx"].tmSDK.sendEvent(eventId, res);
         }

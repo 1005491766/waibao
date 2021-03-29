@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":2,
-    "selecteID":94,
+    "selectedBox":4,
+    "selecteID":5,
     "searchKey":"View",
     "props":{"width":1334,"top":0,"sceneColor":"#000000","right":0,"left":0,"height":750,"bottom":0},
     "nodeParent":-1,
@@ -90,15 +90,16 @@
                                     "props":{"width":275,"skin":"GamePlaying/fangxiang.png","name":"Rocker","left":85,"height":275,"bottom":50,"anchorY":0.5,"anchorX":0.5},
                                     "nodeParent":3,
                                     "label":"Rocker",
-                                    "isOpen":false,
+                                    "isOpen":true,
                                     "isDirectory":true,
                                     "isAniNode":true,
                                     "hasChild":true,
                                     "compId":4,
                                     "child":[
                                         {
-                                            "type":"Button",
-                                            "searchKey":"Button,Btn",
+                                            "x":75,
+                                            "type":"Image",
+                                            "searchKey":"Image,Btn",
                                             "props":{"width":75,"stateNum":"2","skin":"GamePlaying/yaogan.png","name":"Btn","height":75,"centerY":0,"centerX":0,"anchorY":0.5,"anchorX":0.5},
                                             "nodeParent":4,
                                             "label":"Btn",
@@ -110,6 +111,7 @@
                                                 ]
                                         },
                                         {
+                                            "x":75,
                                             "type":"Script",
                                             "switchAble":true,
                                             "source":"src/Scripts/GameCore/Rocker.ts",
@@ -187,7 +189,7 @@
                             "child":[
                                 ]
                         }],
-                    "$HIDDEN":true
+                    "$HIDDEN":false
                 },
                 {
                     "x":30,
@@ -196,14 +198,13 @@
                     "props":{"y":0,"x":0,"right":0,"name":"KingkongPanel","mouseThrough":true,"left":0,"height":750,"bottom":0},
                     "nodeParent":11,
                     "label":"KingkongPanel",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":135,
                     "child":[
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box,RocketCtr",
                             "props":{"y":0,"x":0,"width":500,"name":"RocketCtr","left":0,"height":750,"bottom":0},
@@ -216,7 +217,6 @@
                             "compId":136,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,Rocker",
                                     "props":{"width":275,"skin":"GamePlaying/fangxiang.png","name":"Rocker","left":85,"height":275,"bottom":50,"anchorY":0.5,"anchorX":0.5},
@@ -229,7 +229,6 @@
                                     "compId":137,
                                     "child":[
                                         {
-                                            "x":75,
                                             "type":"Image",
                                             "searchKey":"Image,Btn",
                                             "props":{"width":75,"stateNum":"2","skin":"GamePlaying/yaogan.png","name":"Btn","height":75,"centerY":0,"centerX":0,"anchorY":0.5,"anchorX":0.5},
@@ -243,7 +242,6 @@
                                                 ]
                                         },
                                         {
-                                            "x":75,
                                             "type":"Script",
                                             "switchAble":true,
                                             "source":"src/Scripts/GameCore/Rocker.ts",
@@ -262,7 +260,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Button",
                             "searchKey":"Button,AttackBtn",
                             "props":{"width":175,"stateNum":"2","skin":"GamePlaying/xingxing_gognji.png","right":38,"name":"AttackBtn","mouseThrough":false,"height":175,"bottom":15,"bgColor":"#d7d7d7"},
@@ -277,7 +274,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Button",
                             "searchKey":"Button,JumpBtn",
                             "props":{"width":125,"stateNum":"2","skin":"GamePlaying/tiaoyue.png","right":20,"name":"JumpBtn","mouseThrough":false,"height":125,"bottom":200},
@@ -292,7 +288,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Button",
                             "searchKey":"Button,FireBtn",
                             "props":{"stateNum":"2","skin":"GamePlaying/xingxing_jineng.png","right":230,"name":"FireBtn","mouseThrough":false,"bottom":20},
@@ -306,7 +301,7 @@
                             "child":[
                                 ]
                         }],
-                    "$HIDDEN":false
+                    "$HIDDEN":true
                 },
                 {
                     "x":30,
@@ -460,13 +455,14 @@
             "props":{"width":426,"top":0,"skin":"GamePlaying/renwuban.png","name":"GameStep","height":114,"centerX":0},
             "nodeParent":2,
             "label":"GameStep",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":35,
             "child":[
                 {
+                    "x":30,
                     "type":"FontClip",
                     "searchKey":"FontClip,EnemyCount",
                     "props":{"y":26,"x":308,"width":78,"value":"5/8","skin":"GamePlaying/shuzi_26_hong.png","sheet":"0123456789:/","name":"EnemyCount","height":36,"anchorY":0.5,"anchorX":0.5,"align":"left"},
@@ -481,6 +477,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"FontClip",
                     "searchKey":"FontClip,GameTimer",
                     "props":{"y":66,"x":287,"width":120,"value":"12:30","skin":"GamePlaying/shuzi_2.png","sheet":"0123456789:/","scaleY":1,"scaleX":1,"pivotY":12,"pivotX":60,"name":"GameTimer","height":24},
@@ -495,6 +492,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,EnemyDead",
                     "props":{"y":162,"x":-96.5,"skin":"GamePlaying/tishi1.png","name":"EnemyDead"},
@@ -509,6 +507,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Script",
                     "switchAble":true,
                     "source":"src/Scripts/MyGameView/GameStep.ts",
@@ -526,6 +525,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,Lock",
                     "props":{"y":-24,"x":177,"skin":"GamePlaying/lock.png","name":"Lock","anchorY":0.5,"anchorX":0.5},
@@ -931,14 +931,13 @@
             "props":{"y":260,"x":467,"skin":"GamePlaying/boss_xuetiao_db.png","name":"progress"},
             "nodeParent":2,
             "label":"progress",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":147,
             "child":[
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"y":2,"x":2,"width":400,"skin":"GamePlaying/boss_xuetiao_jingang.png"},
@@ -951,7 +950,6 @@
                     "compId":146,
                     "child":[
                         {
-                            "x":45,
                             "type":"Image",
                             "searchKey":"Image",
                             "props":{"y":8,"width":76,"skin":"GamePlaying/touxiang_jingang.png","right":-58,"pivotY":38,"height":76},
@@ -973,14 +971,13 @@
             "props":{"y":114,"skin":"GamePlaying/boss_xuetiao_db.png","name":"Playerprogress","centerX":0},
             "nodeParent":2,
             "label":"Playerprogress",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":152,
             "child":[
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"y":2,"x":2,"width":400,"skin":"GamePlaying/boss_xuetiao_long.png"},
@@ -993,7 +990,6 @@
                     "compId":153,
                     "child":[
                         {
-                            "x":45,
                             "type":"Image",
                             "searchKey":"Image",
                             "props":{"y":8,"width":76,"skin":"GamePlaying/touxiang_long.png","right":-58,"pivotY":38,"height":76},

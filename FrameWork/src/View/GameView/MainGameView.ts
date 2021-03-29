@@ -16,6 +16,8 @@ export default class MainGameView extends ViewBase_csjc {
     private _startBtn: Laya.Image;
     private _moreGameBtn: Laya.Image;
     private _loopAd: Laya.UIComponent;
+    canin =true
+
     onAwake() {
         this._aniZone = this.owner.getChildByName("AniZone") as Laya.UIComponent;
         this._ani1 = this._aniZone.getChildByName("Robot") as Laya.Image;
@@ -48,6 +50,7 @@ export default class MainGameView extends ViewBase_csjc {
     }
 
     addEvent() {
+        this.canin = true;
         this._startBtn.on(Laya.Event.CLICK, this, this.OnStartBtn);
         this._moreGameBtn.on(Laya.Event.CLICK, this, this.OnMoreGameBtn);
     }
@@ -69,9 +72,15 @@ export default class MainGameView extends ViewBase_csjc {
             this.StartGame();
         }
     }
-
     StartGame() {
+        if(this.canin == false)
+        return ;
         this.closeView();
+
+        this.canin = false
+        console.log("-------------进入游戏界面")
+        // ViewMgr_csjc.instance_csjc.openView_csjc(ViewDef_csjc.KdBannerView);
+        // return
         if (ExamineMgr.CanDoScz_Wx && QpGameSwitch.GameSwitch.bannerKuangdian1 == 1) {
             ViewMgr_csjc.instance_csjc.openView_csjc(ViewDef_csjc.KdBannerView);
         }

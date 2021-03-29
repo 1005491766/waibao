@@ -10,16 +10,14 @@ import BaseState from "../FsmStates/BaseState";
 
 export default class BossRobot extends CharacterCtr {
 
-    get Sprite3D(): Laya.Sprite3D { return this._mowner as Laya.Sprite3D }
-    get kingkong():Laya.Sprite3D{ return this._kingkong as Laya.Sprite3D}
     get Player(): Laya.Sprite3D { return SceneMgr_cscj.Instance.Player.FollowObj; }
     get AniSprite(): Laya.Sprite3D { return this._mowner.getChildAt(0)as Laya.Sprite3D }
     private _die: boolean = false;
     private _timer: number = 0;
-    private _mowner : Laya.Sprite3D = null;
     private _ani : Laya.Animator = null;
     private _rigidBody3D: Laya.Rigidbody3D;
     private _physicsComponent: Laya.PhysicsComponent;
+    private _isAtk:boolean = false
     onEnable()
     {
         super.onEnable()
@@ -33,6 +31,11 @@ export default class BossRobot extends CharacterCtr {
         this._rigidBody3D.isKinematic = false
         
     }
+    // onDisable()
+    // {
+    //     this._rigidBody3D.isKinematic = true
+
+    // }
     Input(point: Laya.Point) {
     }
     MakeFsm() {
@@ -42,6 +45,7 @@ export default class BossRobot extends CharacterCtr {
         {
             this._fsm.AddState(this._kingkong.addComponent(KingkingState));
             this._fsmboss = this._kingkong.getComponent(KingkingState)
+            this._kingkong.getChildAt(0).getChildByName("Attack1_Kingkong").name = "Attack1kk"
             this._tRex.active=false;
             this._playerKind = PlayerType.Kingkong;
         }
@@ -57,25 +61,34 @@ export default class BossRobot extends CharacterCtr {
 
     onUpdate()
     {
+        // console.log("*---------------------------------攻击中罚站",this._isAtk)
+
+        // console.log("*---------------------------------xxxxxxxxxx",this._isAtk)
+
+        if(SceneMgr_cscj.Instance.BossVisible == false||SceneMgr_cscj.Instance.GameOver != 0)
+        return
         super.onUpdate()
+
         // return
         if (this._die||SceneMgr_cscj.Instance.Player==null) return;
         let dis = Laya.Vector3.distance(this.Sprite3D.transform.position, this.Player.transform.position);
         let inPlane = Math.abs(this.Sprite3D.transform.position.y - this.Player.transform.position.y) <= 1;
-        // console.log("----------------是否打人",dis)
         this.AniSprite.transform.localRotationEulerY=0    
+        this.ChaseMethod();
 
+        if(this._isAtk==true)
+        return
         if (dis <= 10 && inPlane&&this._timer<=0) {
             this.Attack();
             this._rigidBody3D.linearVelocity = Laya.Vector3._ZERO
-        }
-        else if (dis < 20 && inPlane) {
-            this.ChaseMethod();
-            // this._ani.play("Idle");
-            this._rigidBody3D.linearVelocity = Laya.Vector3._ZERO
+            this._isAtk = true
+            this._ani.speed =1.5;
+
+            Laya.timer.once(3000,this,()=>{
+                this._isAtk = false
+            })
         }
         else if (dis < 80 && inPlane) {
-            this.ChaseMethod();
             // if(dis<60)
             // {
             //     this._ani.play("Walk");
@@ -84,10 +97,11 @@ export default class BossRobot extends CharacterCtr {
             // }
             // else
             {
-                // console.log("----------------c查看角度",this._mowner.transform.rotationEuler.y)
+                let speed = 0.3 + (dis/80)*0.7
                 this._ani.play("Walk");
-                this._rigidBody3D.linearVelocity = new Laya.Vector3(Math.sin(this.Sprite3D.transform.rotationEuler.y) * 8 ,
-                 this._rigidBody3D.linearVelocity.y, Math.cos(this.Sprite3D.transform.rotationEuler.y) * 8 );
+                this._ani.speed = speed;
+                this._rigidBody3D.linearVelocity = new Laya.Vector3(Math.sin(this.Sprite3D.transform.rotationEuler.y) * 8*speed ,
+                 this._rigidBody3D.linearVelocity.y, Math.cos(this.Sprite3D.transform.rotationEuler.y) * 8*speed );
             }
         }
         else {
@@ -98,9 +112,8 @@ export default class BossRobot extends CharacterCtr {
     }
 
     Attack() {
-        // console.log("----------------c查看角度",this._mowner.transform.rotationEuler.y)    
         this.AniSprite.transform.localRotationEulerY=0    
-        this._timer = 2000;
+        this._timer = 4000;
         this.ChaseMethod();
 
         this.EnemyTrun();

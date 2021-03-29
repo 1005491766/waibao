@@ -10,11 +10,11 @@ import QpRandomJump from "./QpAPI/AdView/QpRandomJump"
 import QpRdListAdBox from "./QpAPI/AdView/QpRdListAdBox"
 import QpShakeAd3View from "./QpAPI/AdView/QpShakeAd3View"
 import FriendExport from "./View/GameView/FriendExport"
-import CoinSubView from "./Scripts/MyGameView/CoinSubView"
-import ExamineCheck from "./Scripts/MyGameView/ExamineCheck"
 import QpShakeAd2View from "./QpAPI/AdView/QpShakeAd2View"
 import QpBannerVIew from "./QpAPI/AdView/QpBannerVIew"
 import GameOverFailView from "./View/GameView/GameOverFailView"
+import CoinSubView from "./Scripts/MyGameView/CoinSubView"
+import ExamineCheck from "./Scripts/MyGameView/ExamineCheck"
 import GameOverWinView from "./View/GameView/GameOverWinView"
 import Controller from "./Scripts/MyGameView/Controller"
 import Rocker from "./Scripts/GameCore/Rocker"
@@ -69,11 +69,11 @@ export default class GameConfig{
         reg("QpAPI/AdView/QpRdListAdBox.ts",QpRdListAdBox);
         reg("QpAPI/AdView/QpShakeAd3View.ts",QpShakeAd3View);
         reg("View/GameView/FriendExport.ts",FriendExport);
-        reg("Scripts/MyGameView/CoinSubView.ts",CoinSubView);
-        reg("Scripts/MyGameView/ExamineCheck.ts",ExamineCheck);
         reg("QpAPI/AdView/QpShakeAd2View.ts",QpShakeAd2View);
         reg("QpAPI/AdView/QpBannerVIew.ts",QpBannerVIew);
         reg("View/GameView/GameOverFailView.ts",GameOverFailView);
+        reg("Scripts/MyGameView/CoinSubView.ts",CoinSubView);
+        reg("Scripts/MyGameView/ExamineCheck.ts",ExamineCheck);
         reg("View/GameView/GameOverWinView.ts",GameOverWinView);
         reg("Scripts/MyGameView/Controller.ts",Controller);
         reg("Scripts/GameCore/Rocker.ts",Rocker);

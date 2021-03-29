@@ -27,7 +27,7 @@
 					"translate":[
 						0,
 						5,
-						4.79
+						4.8
 					],
 					"rotation":[
 						0,
@@ -1279,7 +1279,7 @@
 																							},
 																							{
 																								"props":{
-																									"name":"Attack1",
+																									"name":"Attack1_TRex",
 																									"translate":[
 																										0,
 																										-1.15,
@@ -1648,7 +1648,7 @@
 																			},
 																			{
 																				"props":{
-																					"name":"Attack2",
+																					"name":"Attack2_TRex",
 																					"translate":[
 																						1.57,
 																						0.09,

@@ -1,4 +1,4 @@
-require('utils/tm_sdk_lite.min.js');
+// require('utils/tm_sdk_lite.min.js');
 // if (typeof wx !== "undefined") {
 // 	require('utils/wx/ald-game.js')
 // }

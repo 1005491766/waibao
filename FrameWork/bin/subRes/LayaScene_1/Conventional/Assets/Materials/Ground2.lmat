@@ -25,8 +25,8 @@
 				"name":"albedoTexture",
 				"path":"../Textures/Ground.jpg",
 				"constructParams":[
-					1024,
-					512,
+					256,
+					128,
 					0,
 					true
 				],

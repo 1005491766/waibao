@@ -124,6 +124,7 @@ export default class SceneMgr_cscj extends Laya.Script3D {
         EventMgr_csjc.removeEvent_csjc(EventDef_csjc.Game_Input_csjc, this, this.Input_csjc);
         EventMgr_csjc.removeEvent_csjc(EventDef_csjc.EnemyDead, this, this.OnEnemyDead);
         EventMgr_csjc.removeEvent_csjc(EventDef_csjc.SelectHero, this, this.OnSelectHero);
+        PoolManager.getInstance().ClearPool(0)
 
 
     }

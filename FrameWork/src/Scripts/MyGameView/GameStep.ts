@@ -4,6 +4,8 @@ import { EventDef_csjc } from "../../Event/EventDef";
 import { StateID } from "../GameCore/Fsm/FsmEnum";
 
 export default class GameStep extends Laya.Script {
+    get timevalue(){return this._gameTimer.value};
+
     private _ownerSp: Laya.UIComponent;
     private _enemyList: Array<Laya.Sprite> = [];
     private _testList: Array<Laya.Text> = [];

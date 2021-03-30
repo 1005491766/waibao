@@ -96,8 +96,8 @@ export default class KdBannerView extends ViewBase_csjc {
     }
 
     onCloseEvent = () => {
-        console.log("----------------狂点结束")
-        ViewMgr_csjc.instance_csjc.openView_csjc(ViewDef_csjc.InGameView);
+        // console.log("----------------狂点结束",this._data.func());
+        this._data.func()
         CachedWXBannerAd_csjc.hide_csjc();
     }
 

@@ -76,13 +76,17 @@ export default class MainGameView extends ViewBase_csjc {
         if(this.canin == false)
         return ;
         this.closeView();
+        this.canin = false;
 
-        this.canin = false
         console.log("-------------进入游戏界面")
-        // ViewMgr_csjc.instance_csjc.openView_csjc(ViewDef_csjc.KdBannerView);
+        // ViewMgr_csjc.instance_csjc.openView_csjc(ViewDef_csjc.KdBannerView,{func:()=>{
+        //     ViewMgr_csjc.instance_csjc.openView_csjc(ViewDef_csjc.InGameView);
+        // }});
         // return
         if (ExamineMgr.CanDoScz_Wx && QpGameSwitch.GameSwitch.bannerKuangdian1 == 1) {
-            ViewMgr_csjc.instance_csjc.openView_csjc(ViewDef_csjc.KdBannerView);
+            ViewMgr_csjc.instance_csjc.openView_csjc(ViewDef_csjc.KdBannerView,{func:()=>{
+                ViewMgr_csjc.instance_csjc.openView_csjc(ViewDef_csjc.InGameView);
+            }});
         }
         else {
             ViewMgr_csjc.instance_csjc.openView_csjc(ViewDef_csjc.InGameView);

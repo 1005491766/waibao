@@ -10,6 +10,8 @@ import ExamineMgr from "../../CommomAPI/ExamineMgr";
 import CachedWXBannerAd_csjc from "../../PlatformApi/CachedWXBannerAd";
 import Camera2UI from "../../Scripts/GameCore/Camera2UI";
 import { PlayerType } from "../../Scripts/GameCore/Enums";
+import QpGameSwitch from "../../QpAPI/QpGameSwitch";
+import GameStep from "../../Scripts/MyGameView/GameStep";
 
 export default class InGameView extends ViewBase_csjc {
     private _moreGameBtn: Laya.Image;
@@ -22,8 +24,11 @@ export default class InGameView extends ViewBase_csjc {
 
     private _playerPros:Laya.Image;
     private _playerProsSpeedOf:Laya.Image;
-    private _selecetKind = 0
+    private _selecetKind = 0;
+    private tip_boss:Laya.Sprite;
+    private timer_boss:Laya.FontClip;
 
+    private GameStep:Laya.Sprite;
     onAwake() {
         this._moreGameBtn = this.owner.getChildByName("MoreGameBtn") as Laya.Image;
         this._tutorialBtn = this.owner.getChildByName("TutorialBtn") as Laya.Image;
@@ -32,9 +37,12 @@ export default class InGameView extends ViewBase_csjc {
         this._prosSpeedOf = this._pros.getChildAt(0) as Laya.Image;
         this._playerPros = this.owner.getChildByName("Playerprogress") as Laya.Image;
         this._playerProsSpeedOf = this._playerPros.getChildAt(0) as Laya.Image;
-
+        this.tip_boss = this.owner.getChildByName("tip_boss") as Laya.Sprite
+        this.timer_boss = this.tip_boss.getChildByName("GameTimer") as Laya.FontClip
         this._pros.visible =false
         this._playerPros.visible =false
+
+        this.GameStep = this.owner.getChildByName("GameStep") as Laya.Sprite;
 
         this._fail = this.owner.getChildByName("Fail") as Laya.Image;
         this._complete.visible = false;
@@ -49,8 +57,6 @@ export default class InGameView extends ViewBase_csjc {
         this._moreGameBtn.on(Laya.Event.CLICK, this, this.OnMoreGameBtn);
         EventMgr_csjc.regEvent_csjc(EventDef_csjc.SelectHero, this, this.OnSelectHero);
         EventMgr_csjc.regEvent_csjc(EventDef_csjc.BossVisible, this, this.onBossVisible);
-
-
     }
     removeEvent(){
         EventMgr_csjc.removeEvent_csjc(EventDef_csjc.SelectHero, this, this.OnSelectHero);
@@ -63,6 +69,8 @@ export default class InGameView extends ViewBase_csjc {
     {
         this._pros.visible =true
         this._playerPros.visible =true
+        this.tip_boss.visible=true
+        this.GameStep.alpha = 0
 
     }
     /**监听选择英雄 */
@@ -112,10 +120,11 @@ export default class InGameView extends ViewBase_csjc {
         // SceneMgr_cscj.Instance.StartGame();
 
         ViewMgr_csjc.instance_csjc.openView_csjc(ViewDef_csjc.SelectHero);
-
         this._playerProsSpeedOf.width = 400;
 
         this._prosSpeedOf.width = 400;
+        this.tip_boss.visible=false
+        this.GameStep.alpha = 1
     }
 
     onCloseEvent = () => {
@@ -142,6 +151,7 @@ export default class InGameView extends ViewBase_csjc {
             pos = Camera2UI.WorldToScreen2(SceneMgr_cscj.Instance.Camera, (SceneMgr_cscj.Instance.BossSprite3D.getChildAt(this._selecetKind) as Laya.Sprite3D).transform.position)
             this._pros.x = pos.x-300
             this._pros.y = pos.y-100
+            this.timer_boss.value = this.GameStep.getComponent(GameStep).timevalue
             this.onCheckPros()
         }
 
@@ -181,7 +191,20 @@ export default class InGameView extends ViewBase_csjc {
     }
     GameOver(win: boolean) {
         this.closeView();
-        if (ExamineMgr.CanDoScz_Wx) {
+        if (ExamineMgr.CanDoScz_Wx&&QpGameSwitch.GameSwitch.bannerKuangdian1 == 1) {
+            ViewMgr_csjc.instance_csjc.openView_csjc(ViewDef_csjc.KdBannerView,{func:()=>{
+                let data = { Win: false };
+                if (win) {
+                    data.Win = true;
+                }
+                else {
+                    data.Win = false;
+                }
+                ViewMgr_csjc.instance_csjc.openView_csjc(ViewDef_csjc.HExport1AdView, data);
+                // ViewMgr_csjc.instance_csjc.openView_csjc(ViewDef_csjc.InGameView);
+            }});
+        }   
+        else if (ExamineMgr.CanDoScz_Wx) {
             let data = { Win: false };
             if (win) {
                 data.Win = true;
@@ -190,8 +213,8 @@ export default class InGameView extends ViewBase_csjc {
                 data.Win = false;
             }
             ViewMgr_csjc.instance_csjc.openView_csjc(ViewDef_csjc.HExport1AdView, data);
-        }
-        else {
+        }   
+        else { 
             if (win) {
                 ViewMgr_csjc.instance_csjc.openView_csjc(ViewDef_csjc.GameOverWinView);
             }
